@@ -1,0 +1,814 @@
+<!doctype html><html lang="fr-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>SuiviPhotoDEP — Démo interactive locale</title><meta name="description" content="Démonstration locale avec élèves fictifs; aucune connexion à SharePoint."><style>:root{--bg:#f3f7f7;--paper:#fff;--alt:#e8eeee;--ink:#172126;--dim:#5e6d72;--line:#cbd7d8;--teal:#0e7c86;--teal-d:#09636d;--red:#c9533a;--green:#27715f;--blue:#155fa8;--shadow:0 8px 22px rgba(23,33,38,.08)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.46 'Segoe UI',Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.55}a{color:var(--teal)}.app{display:flex;min-height:100vh}.sidebar{width:245px;flex:none;background:#16363c;color:#d6e9e8;position:sticky;top:0;height:100vh;padding:22px 13px;overflow:auto}.brand{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:850;color:#fff;padding:8px 11px 22px}.brand svg{width:28px;height:28px}.sidebar .tag{font-size:10px;border:1px solid #6a999d;border-radius:5px;color:#b6eeee;margin-left:11px;padding:2px 7px}.nav{display:grid;gap:4px;margin-top:14px}.nav button{display:flex;gap:10px;align-items:center;width:100%;background:none;border:0;color:#d1e2e3;text-align:left;border-radius:9px;padding:11px 13px;min-height:43px;font-weight:600}.nav button:hover,.nav button.active{background:#24646c;color:#fff}.nav button .ni{width:23px;font-size:18px;text-align:center}.sidebar small{color:#a9c1c3;display:block;margin:24px 13px 0}.content{flex:1;min-width:0;padding:26px clamp(14px,3.2vw,52px) 70px;max-width:1500px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:24px}.top h1{font-size:29px;line-height:1.1;margin:0 0 5px;letter-spacing:-.02em}.muted{color:var(--dim);font-size:13px}.top .badge{padding:7px 12px;border-radius:30px;background:#ffecc9;color:#845211;font-size:12px;font-weight:800;white-space:nowrap}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.card,.panel{background:var(--paper);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow)}.card{padding:20px}.card .num{font-size:32px;font-weight:800;color:var(--teal);font-variant-numeric:tabular-nums}.card small{display:block;color:var(--dim);font-weight:700;margin-bottom:5px}.panel{padding:22px;margin:15px 0}.panel h2{font-size:18px;margin:0 0 8px}.panel h3{font-size:16px;margin:0 0 10px}.panel .subtitle{color:var(--dim);margin:0 0 18px}.cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}.form{display:grid;gap:12px}.formgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.formgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.field{display:grid;gap:5px;min-width:0}.field label,.field>span{font-size:12px;color:var(--dim);font-weight:750}.field input,.field select,.field textarea{width:100%;background:#fff;border:1.5px solid #bdcfd0;color:var(--ink);border-radius:8px;padding:11px 12px;min-height:46px;max-width:100%}.field select{appearance:auto;background:#eefbfa;border:2px solid #7aaeb1;padding-right:14px;font-weight:650}.field :focus{outline:2px solid #0e7c86;outline-offset:1px}.actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.btn{border-radius:9px;border:1px solid var(--line);min-height:43px;padding:10px 16px;background:var(--paper);color:var(--ink);font-weight:750}.btn:hover{filter:brightness(.95)}.btn.primary{background:var(--teal);color:white;border-color:var(--teal)}.btn.danger{background:#fff4f1;color:#a9361e;border-color:#eac8c0}.btn.mini{min-height:32px;padding:5px 10px;font-size:12px}.btn.ghost{background:#eff6f6}.tablewrap{width:100%;overflow:auto;max-height:680px}table{border-collapse:collapse;min-width:680px;width:100%}th,td{padding:11px 12px;text-align:left;border-bottom:1px solid #dfebeb;vertical-align:middle}th{color:#577176;font-size:11px;letter-spacing:.045em;text-transform:uppercase;position:sticky;top:0;background:#f1f7f7}tr:hover td{background:#f7fafa}.pill{display:inline-block;border-radius:24px;padding:4px 9px;font-size:12px;font-weight:750;background:#e6edf1;color:#485d63}.pill.ok{background:#e1f4eb;color:#176343}.pill.bad{background:#ffede8;color:#a53d28}.pill.blue{background:#e9f1ff;color:#1b4c93}.pill.gold{background:#fff1d2;color:#9a6817}.progress{height:8px;background:#d7e5e5;border-radius:20px;overflow:hidden;min-width:60px}.progress>span{display:block;background:#0e7c86;height:100%;border-radius:20px}.titlebar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:16px;flex-wrap:wrap}.hero{background:#e7f4f3;border:1px solid #c7e0de;border-radius:12px;padding:23px;margin-bottom:15px}.hero h2{margin:0;font-size:20px}.hero p{margin:8px 0 0;color:#48666a}.hint{background:#fff7e7;border-left:4px solid #dca244;color:#795d27;padding:12px 14px;font-size:13px;border-radius:5px}.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:15px}.tabs button{min-height:36px;padding:8px 12px;border-radius:7px;border:1px solid #b9d2d3;background:#f6fbfb;font-size:13px}.tabs button.active{background:#0e7c86;color:#fff}.toast{position:fixed;bottom:22px;right:24px;z-index:99;max-width:min(460px,90vw);background:#163c42;color:white;padding:13px 16px;border-radius:11px;box-shadow:var(--shadow);font-weight:650}.pillrow{display:flex;gap:7px;flex-wrap:wrap}.mini-list{display:grid;gap:8px}.mini-row{padding:12px;background:#f5faf9;border:1px solid #deebea;border-radius:8px;display:flex;justify-content:space-between;gap:12px;align-items:center}.modalbg{position:fixed;inset:0;background:rgba(15,37,40,.55);display:grid;place-items:center;padding:16px;z-index:90}.modal{background:#fff;border-radius:14px;width:min(700px,100%);max-height:88vh;overflow:auto;padding:24px}.mobilehead{display:none}.quicknav{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}.quicknav button{padding:13px 16px;border-radius:9px;border:1px solid #bad5d6;background:white;color:var(--teal);font-weight:750}.footnote{font-size:12px;color:var(--dim);margin-top:22px}.sidever{border-top:1px solid #326368;padding-top:14px}.searchbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.searchbar input{border:1px solid #becfd1;border-radius:9px;padding:10px;min-height:43px;flex:1;min-width:180px}.searchbar select{border:1px solid #becfd1;border-radius:9px;padding:10px;min-height:43px}.metric{font-size:22px;font-weight:800;color:var(--teal)}.empty{padding:20px;color:var(--dim);text-align:center}.linkbutton{border:0;color:var(--teal);background:none;text-decoration:underline;font-weight:750;padding:2px}.inset{padding:14px;background:#f5faf9;border:1px solid #deebea;border-radius:9px}.two-level{display:flex;gap:12px;align-items:center}.warn{color:#b55322;font-weight:700}
+@media(max-width:1000px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.formgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.sidebar{width:205px}.cols{grid-template-columns:1fr}}
+@media(max-width:730px){.app{display:block}.sidebar{width:100%;height:auto;position:sticky;top:0;z-index:12;padding:0 12px 6px;overflow:visible}.sidebar .brand{padding:9px 6px}.sidebar .brand svg{width:20px;height:20px}.sidebar .tag,.sidebar small{display:none}.nav{display:flex;overflow-x:auto;margin:0;gap:4px;white-space:nowrap;padding-bottom:4px;scrollbar-width:thin}.nav button{width:auto;min-height:40px;padding:8px 13px;font-size:12px}.nav button .ni{font-size:15px;width:18px}.content{padding:17px 14px 60px}.top h1{font-size:25px}.panel{padding:16px}.cards{gap:8px}.card{padding:14px}.card .num{font-size:25px}.formgrid,.formgrid.two{grid-template-columns:1fr}.cols{gap:5px}.top .badge{font-size:11px}h2{line-height:1.25}.mini-row{align-items:flex-start;flex-direction:column}.modal{padding:16px}}
+
+@media(max-width:730px){.sidebar{position:relative}.nav{scroll-snap-type:x proximity}.nav button{scroll-snap-align:start;min-height:48px}.top{align-items:flex-start;flex-wrap:wrap}.top .badge{white-space:normal}.content{padding-bottom:calc(76px + env(safe-area-inset-bottom))}.tablewrap{overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}.btn,.quicknav button{min-height:46px}.studentbar select{flex:1;min-width:170px}.mobilehint{display:block}}@media(min-width:731px){.mobilehint{display:none}}@media print{.sidebar,.top .badge,.actions,.btn,.hint{display:none!important}.content{padding:0}.panel{box-shadow:none}.tablewrap{max-height:none;overflow:visible}body{font-size:11px}}.studentbar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:11px;padding:10px 13px;margin:-7px 0 18px}.studentbar label{font-weight:750;font-size:12px;color:var(--dim)}.studentbar select{min-height:39px;border:1px solid #a8c7c8;border-radius:7px;background:#eefbfa;padding:6px 9px;max-width:100%}.studentbar .btn{min-height:38px;padding:7px 11px}.studentbar .spacer{flex:1}.nav button[aria-current="page"]{box-shadow:inset 3px 0 #a1e6df}@media(max-width:730px){.studentbar{margin:0 0 12px}.studentbar .spacer{display:none}}
+/* V2.7 — Identité visuelle calquée sur les captures de SuiviPhotoDEP (13 novembre 2026).
+   Surcouche de présentation seulement : aucune modification des données ou règles métier. */
+:root{--bg:#f3f7f8;--paper:#fff;--alt:#e7eeef;--ink:#10212c;--dim:#617786;--line:#c7d6da;--teal:#087e87;--teal-d:#076e76;--shadow:none}
+body{background:#f3f7f8;color:#10212c;font:13px/1.52 'Segoe UI',Arial,sans-serif}
+.app{display:block;min-height:100vh}
+.sidebar{position:sticky;top:0;z-index:20;width:100%;height:auto;overflow:visible;background:#f3f7f8;color:#53636d;border-bottom:1px solid #cbd7da;padding:7px 18px 8px;display:flex;justify-content:center;align-items:center;gap:0}
+.sidebar .brand,.sidebar .tag,.sidebar .sidever{display:none!important}
+.nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 6px;margin:0;max-width:1120px}
+.nav button{display:inline-flex;justify-content:center;align-items:center;width:auto;min-width:126px;min-height:40px;max-width:160px;border:0;border-radius:6px;background:transparent;color:#56656d;text-align:center;padding:7px 13px;font:700 12px/1.2 Georgia,'Times New Roman',serif}
+.nav button .ni{display:none}.nav button:hover{background:#e7eff0;color:#10212c}.nav button.active{background:#087e87;color:white}.nav button[aria-current="page"]{box-shadow:none}
+.content{width:min(100%,1050px);max-width:1050px;margin:0 auto;padding:36px 24px 75px}
+.top{margin-bottom:24px;align-items:flex-start}.top h1{font-size:40px;line-height:1.15;letter-spacing:-.025em;font-weight:800;color:#10212c}.top .badge{border-radius:5px;background:#e7eeef;color:#557078}
+.panel,.card{background:#fff;border:1px solid #d3dfe1;border-radius:9px;box-shadow:none}
+.panel{padding:19px 20px;margin:14px 0;border-top:3px solid #087e87}.panel h2{font-size:18px;color:#10212c}.panel h3{font-size:15px}.card{padding:18px}.card .num{color:#087e87}
+.hero{background:#fff;border:1px solid #cbd9dc;border-top:3px solid #087e87;border-radius:8px;padding:20px}.hero h2{font-size:19px}
+.btn,.tabs button,.quicknav button{border-radius:6px;font-size:12px;font-weight:750;min-height:37px;padding:8px 12px}.btn.primary,.tabs button.active{background:#087e87;border-color:#087e87;color:#fff}
+.field input,.field select,.field textarea{border:1px solid #c5d5d9;border-radius:7px;min-height:40px;padding:8px 10px;background:#fff;color:#10212c}.field select{font-weight:500;border:1px solid #c5d5d9;background:#fff}
+.studentbar{background:transparent;border:0;border-bottom:1px solid #d5e0e1;border-radius:0;padding:0 0 14px;margin:0 0 19px}.studentbar select{background:#fff;border:1px solid #c5d5d9}
+th{background:#f0f5f5;color:#51646e;letter-spacing:0;text-transform:none;font-size:12px}th,td{border-bottom:1px solid #dbe4e6}
+.pill{border-radius:6px}.mini-row{background:#fff;border-color:#d3dfe1}.hint{border-left-color:#087e87;background:#eef5f5;color:#445d63}
+@media(max-width:730px){.sidebar{position:sticky;top:0;padding:5px 6px;display:block}.nav{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;max-width:none;scroll-snap-type:x proximity}.nav button{flex:none;min-width:105px;max-width:140px;min-height:43px;padding:6px 10px;font-size:11px}.content{padding:24px 13px 65px}.top h1{font-size:32px}.panel{padding:15px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media print{.sidebar{display:none!important}.content{width:100%;max-width:none}}
+
+/* V2.8 — Mesures rapprochées des captures originales, page Réglages. */
+:root{--bg:#f3f7f8;--teal:#087d86;--line:#c7d5da}
+body{font-family:Arial,'Segoe UI',sans-serif;font-size:12px;line-height:1.55}
+.sidebar{height:59px;padding:7px 12px;background:#f3f7f8}
+.nav{gap:5px;max-width:1000px;flex-wrap:nowrap}
+.nav button{min-width:143px;max-width:150px;height:41px;font-size:12px;font-family:Georgia,'Times New Roman',serif;line-height:1.12}
+.nav button:nth-child(n+7){display:none}
+.content{max-width:1042px;width:100%;padding:34px 23px 70px}
+.top{margin-bottom:25px}.top h1{font-size:40px;line-height:1.2;font-weight:850;letter-spacing:-1px}
+.settings-intro{margin-bottom:10px}.settings-intro strong{font-size:12px}.settings-intro p{margin:2px 0 0;color:#617786;font-size:12px}
+.settings-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-bottom:21px}
+.settings-tile{height:52px;padding:9px 10px;text-align:left;background:#fff;border:1px solid #c5d4d8;border-radius:6px;color:#091923;font-size:12px;font-weight:750;cursor:pointer}
+.settings-tile.active,.settings-tile:hover.active{background:#087d86;color:#fff;border-color:#087d86}
+.settings-tile:hover:not(.active){background:#f9fdfd;border-color:#91b8be}
+.settings-detail>h2{font-size:18px;margin:0 0 1px;font-weight:800}.settings-description{font-size:12px;color:#607789;margin:0 0 15px;max-width:780px}
+.settings-sheet{background:#fff;border:0;border-top:3px solid #087d86;border-radius:7px;padding:28px 17px 20px;min-height:120px}
+.settings-sheet h3{font-size:16px;margin:0 0 8px}.settings-search{width:100%;height:40px;border:1px solid #c5d5d9;border-radius:7px;padding:9px;font-size:12px;margin-bottom:14px}
+.settings-history-row{padding:12px 0;border-bottom:1px solid #d8e2e4}.system-rows{margin:12px 0;border:1px solid #d3dfe1;border-radius:7px;overflow:hidden}.system-rows>div{display:flex;justify-content:space-between;padding:13px 15px;border-bottom:1px solid #e3ebec}.system-rows>div:last-child{border:0}.system-rows>div span:last-child{color:#006a58}
+.settings-correction{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.settings-correction .field:first-child{grid-column:1/-1}.settings-sheet .field label{font-size:12px;color:#0a1d26}.settings-sheet .field select,.settings-sheet .field input{min-height:40px}
+@media(max-width:730px){.sidebar{height:auto}.nav{overflow-x:auto;justify-content:flex-start}.nav button{min-width:120px}.content{padding:25px 14px}.settings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.settings-tile{height:49px}.settings-correction{grid-template-columns:1fr}}
+
+/* V2.9 — affinage de la grille de référence (captures 13 novembre 2026). */
+:root{--bg:#f3f7f8;--paper:#ffffff;--teal:#087e87;--ink:#0a1b24;--line:#c7d5d9}
+body{background:#f3f7f8;color:#0a1b24}
+.sidebar{border-bottom:1px solid #cbd7da;box-shadow:none}
+.nav button{border-radius:6px;font-weight:700}
+.nav button.active{background:#087e87;color:#fff}
+.nav button:focus-visible,.settings-tile:focus-visible,.btn:focus-visible{outline:3px solid #005d65;outline-offset:2px}
+.settings-grid{gap:6px}
+.settings-tile{min-height:52px;line-height:1.25;transition:background .12s ease}
+.settings-detail{margin-top:0}
+.settings-sheet{box-shadow:none;border-top:3px solid #087e87}
+.settings-sheet input,.settings-sheet select{accent-color:#087e87}
+@media(max-width:730px){.settings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.settings-tile{min-height:54px}.content{padding-top:24px}}
+@media(max-width:400px){.settings-grid{grid-template-columns:1fr 1fr}.settings-tile{font-size:11px;padding:8px}}
+</style></head><body><div class="app"><aside class="sidebar"><div class="brand"><svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="7" width="26" height="19" rx="4" fill="#a1e6df"/><circle cx="15" cy="16.5" r="6.3" fill="#0e7c86"/><circle cx="15" cy="16.5" r="3" fill="#c6fffa"/><path d="M9 7l2-3h8l2 3" stroke="#a1e6df" stroke-width="2"/></svg><span>SuiviPhotoDEP</span></div><span class="tag">Prototype M365 · V2.8</span><nav class="nav" id="nav" aria-label="Navigation de SuiviPhotoDEP"></nav><small class="sidever">Essais sans données réelles<br>Réglages et dossiers fictifs uniquement<br><button style="background:none;border:0;color:#b6e8e6;margin-top:12px;text-align:left;padding:0;text-decoration:underline" onclick="resetDemo()">Réinitialiser la démo</button></small></aside><main class="content" id="screen"></main></div><div id="modalwrap" hidden></div><div id="toast" class="toast" role="status" hidden></div><script>'use strict';
+const START_DATA={"competences":[{"Code":"474-202","Title":"Métier et formation","Bloc":"Bloc 1","Ordre":1,"Heures":24,"JoursCibles":4,"Actif":true},{"Code":"474-215","Title":"Logiciels d'application et de gestion de documents en photographie","Bloc":"Bloc 1","Ordre":2,"Heures":45,"JoursCibles":7,"Actif":true},{"Code":"474-228","Title":"Prises de vue hors studio","Bloc":"Bloc 1","Ordre":3,"Heures":120,"JoursCibles":18,"Actif":true},{"Code":"474-236","Title":"Éclairage","Bloc":"Bloc 1","Ordre":4,"Heures":90,"JoursCibles":14,"Actif":true},{"Code":"474-248","Title":"Prises de vue en studio","Bloc":"Bloc 2","Ordre":5,"Heures":120,"JoursCibles":18,"Actif":true},{"Code":"474-256","Title":"Composition d'images","Bloc":"Bloc 1","Ordre":6,"Heures":84,"JoursCibles":13,"Actif":true},{"Code":"474-266","Title":"Traitement de fichiers photographiques à l'état brut","Bloc":"Bloc 1","Ordre":7,"Heures":90,"JoursCibles":14,"Actif":true},{"Code":"474-273","Title":"Gestion des couleurs en photographie","Bloc":"Bloc 2","Ordre":8,"Heures":45,"JoursCibles":7,"Actif":true},{"Code":"474-285","Title":"Correction des photographies","Bloc":"Bloc 2","Ordre":9,"Heures":104,"JoursCibles":16,"Actif":true},{"Code":"474-296","Title":"Diffusion des photographies","Bloc":"Bloc 2","Ordre":10,"Heures":104,"JoursCibles":16,"Actif":true},{"Code":"474-303","Title":"Relations professionnelles en photographie","Bloc":"Magistral","Ordre":11,"Heures":45,"JoursCibles":7,"Actif":true},{"Code":"474-313","Title":"Vente de services et de produits photographiques","Bloc":"Magistral","Ordre":12,"Heures":45,"JoursCibles":7,"Actif":true},{"Code":"474-323","Title":"Photographies d'événements sociaux","Bloc":"Bloc 2","Ordre":13,"Heures":45,"JoursCibles":7,"Actif":true},{"Code":"474-336","Title":"Traitement avancé de photographies","Bloc":"Bloc 3","Ordre":14,"Heures":90,"JoursCibles":14,"Actif":true},{"Code":"474-344","Title":"Assistance technique au traitement d’images","Bloc":"Bloc 3","Ordre":15,"Heures":60,"JoursCibles":9,"Actif":true},{"Code":"474-357","Title":"Portraits","Bloc":"Bloc 3","Ordre":16,"Heures":120,"JoursCibles":18,"Actif":true},{"Code":"474-367","Title":"Photographies à caractère spécialisé","Bloc":"Bloc 3","Ordre":17,"Heures":90,"JoursCibles":14,"Actif":true},{"Code":"474-374","Title":"Pratique de la fonction de technicienne ou technicien en imagerie photographique","Bloc":"Stage","Ordre":18,"Heures":60,"JoursCibles":9,"Actif":true},{"Code":"474-384","Title":"Assistance technique pour des prises de vue","Bloc":"Blocs 3-4","Ordre":19,"Heures":45,"JoursCibles":7,"Actif":true},{"Code":"474-396","Title":"Photographies publicitaires et commerciales","Bloc":"Bloc 4","Ordre":20,"Heures":104,"JoursCibles":16,"Actif":true},{"Code":"474-403","Title":"Photographies industrielles","Bloc":"Bloc 3","Ordre":21,"Heures":45,"JoursCibles":7,"Actif":true},{"Code":"474-416","Title":"Projet photographique personnel","Bloc":"Blocs 3-4","Ordre":22,"Heures":90,"JoursCibles":14,"Actif":true},{"Code":"474-423","Title":"Gestion et promotion de carrière","Bloc":"Bloc 4","Ordre":23,"Heures":45,"JoursCibles":7,"Actif":true},{"Code":"474-436","Title":"Intégration au milieu de travail","Bloc":"Stage","Ordre":24,"Heures":90,"JoursCibles":14,"Actif":true}],"eleves":[{"NoFiche":"0000123","Title":"Camille Fictif","Laboratoire":"LAB1","Statut":"active","Actif":true,"JoursBanque":0,"Courriel":"camille.fictif@exemple.invalid"},{"NoFiche":"0000456","Title":"Alex Exemple","Laboratoire":"LAB2","Statut":"active","Actif":true,"JoursBanque":1,"Courriel":"alex.exemple@exemple.invalid"}],"presences":[{"ClePointage":"0000123|2026-11-09|AM","NoFiche":"0000123","DateJour":"2026-11-09","Laboratoire":"LAB1","Session":"AM","HeureArrivee":"08:15","HeureDepart":"11:15","CodeCompetence":"474-202","Statut":"present","RetardMinutes":0,"DepartHatifMinutes":0},{"ClePointage":"0000123|2026-11-09|PM","NoFiche":"0000123","DateJour":"2026-11-09","Laboratoire":"LAB1","Session":"PM","HeureArrivee":"12:15","HeureDepart":"16:15","CodeCompetence":"474-202","Statut":"present","RetardMinutes":0,"DepartHatifMinutes":0},{"ClePointage":"0000456|2026-11-09|AM","NoFiche":"0000456","DateJour":"2026-11-09","Laboratoire":"LAB2","Session":"AM","HeureArrivee":"08:35","HeureDepart":"11:15","CodeCompetence":"474-215","Statut":"retard","RetardMinutes":15,"DepartHatifMinutes":0},{"ClePointage":"0000456|2026-11-09|PM","NoFiche":"0000456","DateJour":"2026-11-09","Laboratoire":"LAB2","Session":"PM","HeureArrivee":"","HeureDepart":"","CodeCompetence":"474-215","Statut":"absent","RetardMinutes":0,"DepartHatifMinutes":0},{"ClePointage":"0000123|2026-11-10|AM","NoFiche":"0000123","DateJour":"2026-11-10","Laboratoire":"LAB1","Session":"AM","HeureArrivee":"08:15","HeureDepart":"11:15","CodeCompetence":"474-215","Statut":"present","RetardMinutes":0,"DepartHatifMinutes":0},{"ClePointage":"0000123|2026-11-10|PM","NoFiche":"0000123","DateJour":"2026-11-10","Laboratoire":"LAB1","Session":"PM","HeureArrivee":"12:15","HeureDepart":"16:15","CodeCompetence":"474-215","Statut":"present","RetardMinutes":0,"DepartHatifMinutes":0},{"ClePointage":"0000456|2026-11-10|AM","NoFiche":"0000456","DateJour":"2026-11-10","Laboratoire":"LAB2","Session":"AM","HeureArrivee":"08:15","HeureDepart":"11:15","CodeCompetence":"474-215","Statut":"present","RetardMinutes":0,"DepartHatifMinutes":0},{"ClePointage":"0000456|2026-11-10|PM","NoFiche":"0000456","DateJour":"2026-11-10","Laboratoire":"LAB2","Session":"PM","HeureArrivee":"12:15","HeureDepart":"16:15","CodeCompetence":"474-215","Statut":"present","RetardMinutes":0,"DepartHatifMinutes":0}],"examens":[{"CleExamen":"0000123|474-202|1","NoFiche":"0000123","CodeCompetence":"474-202","Tentative":1,"DateExamen":"2026-11-10","Resultat":"SU","JoursRepriseAjoutes":false},{"CleExamen":"0000456|474-215|1","NoFiche":"0000456","CodeCompetence":"474-215","Tentative":1,"DateExamen":"2026-11-11","Resultat":"EC","JoursRepriseAjoutes":false}],"parametres":[{"Cle":"amStart","Title":"Début AM","Valeur":"08:15","Categorie":"Horaires"},{"Cle":"amLate","Title":"Seuil retard AM","Valeur":"08:30","Categorie":"Présences"},{"Cle":"amEnd","Title":"Fin AM","Valeur":"11:15","Categorie":"Horaires"},{"Cle":"pmStart","Title":"Début PM","Valeur":"12:15","Categorie":"Horaires"},{"Cle":"pmLate","Title":"Seuil retard PM","Valeur":"12:30","Categorie":"Présences"},{"Cle":"pmEnd","Title":"Fin PM","Valeur":"16:15","Categorie":"Horaires"},{"Cle":"lateStepMinutes","Title":"Arrondi retard (min)","Valeur":"15","Categorie":"Présences"},{"Cle":"earlyDepartureThresholdMinutes","Title":"Seuil départ hâtif","Valeur":"15","Categorie":"Présences"},{"Cle":"alertAbsences","Title":"Seuil demi-journées absence","Valeur":"4","Categorie":"Alertes"},{"Cle":"examWarningHalfDays","Title":"Avertissement avant examen","Valeur":"4","Categorie":"Examens"}],"joursFeries":[]};
+const KEY='suiviphotodep-m365-prototype-v1';
+let state;try{state=JSON.parse(localStorage.getItem(KEY))||structuredClone(START_DATA)}catch(_){state=structuredClone(START_DATA)}
+for(const k of Object.keys(START_DATA)) if(!Array.isArray(state[k]))state[k]=structuredClone(START_DATA[k]);
+if(!Array.isArray(state.competencesOuvertes))state.competencesOuvertes=[];
+// V1.8 : garde-fou local. Aucune donnée nominative ajoutée dans cette démonstration.
+const DEMO_IDS=new Set(['0000123','0000456']);
+const DEMO_NAMES={'0000123':'Camille Fictif','0000456':'Alex Exemple'};
+function sanitizeDemoState(){
+ state.eleves=structuredClone(START_DATA.eleves).map(original=>{
+  const old=state.eleves.find(x=>x.NoFiche===original.NoFiche);
+  return {...original,JoursBanque:Number.isFinite(Number(old?.JoursBanque))?Number(old.JoursBanque):original.JoursBanque};
+ });
+ for(const key of ['presences','examens','competencesOuvertes','declarationsAvance','ajustementsBanque','historiqueHeures','corrections']){
+  if(Array.isArray(state[key]))state[key]=state[key].filter(x=>!x.NoFiche||DEMO_IDS.has(x.NoFiche));
+ }
+ const seen=new Set();
+ state.presences=state.presences.filter(p=>{
+  const key=p.NoFiche+'|'+p.DateJour+'|'+p.Session;
+  if(!DEMO_IDS.has(p.NoFiche)||!isSafePointage(p)||seen.has(key))return false;
+  seen.add(key);p.ClePointage=key;return true;
+ });
+}
+function isSafePointage(p){return /^\d{4}-\d{2}-\d{2}$/.test(p.DateJour||'')&&['AM','PM'].includes(p.Session)}
+sanitizeDemoState();
+
+let focusComp='474-202', examFocus='', view='accueil', selected='0000123',filterDate='2026-11-10',labFilter='TOUS',search='',settingGroup='Présence';
+const PAGES=[['pointage','▣','Prise de présence'],['presences','✓','Gestion des présences'],['eleves','♙','Gestion des élèves'],['examens','★','Gestion des examens'],['rapports','▧','Rapports hebdomadaires'],['reglages','⚙','Réglages'],['accueil','⌂','Tableau de bord'],['journal','▤','Journal'],['calendrier','▦','Calendrier'],['import','⇣','Importer'],['portail','◉','Mon cheminement']];
+const TITLES={accueil:'Tableau de bord',pointage:'Prise de présence',presences:'Gestion des présences',eleves:'Gestion des élèves',fiche:'Fiche d’élève',journal:'Journal des pointages',examens:'Gestion des examens',rapports:'Rapports hebdomadaires',calendrier:'Calendrier scolaire',reglages:'Réglages',import:'Importation des élèves',portail:'Mon cheminement · aperçu'};
+const $=id=>document.getElementById(id), esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const comp=code=>state.competences.find(c=>c.Code===code);const stu=id=>state.eleves.find(s=>s.NoFiche===id);
+const opts=(arr,chosen)=>arr.map(([val,label])=>`<option value="${esc(val)}" ${String(val)===String(chosen)?'selected':''}>${esc(label)}</option>`).join('');
+const stopts=id=>opts(state.eleves.map(s=>[s.NoFiche,s.Title+' · '+s.NoFiche]),id);
+const cpOpts=code=>opts(state.competences.filter(c=>c.Actif).map(c=>[c.Code,c.Code+' · '+c.Title]),code);
+const val=key=>state.parametres.find(x=>x.Cle===key)?.Valeur??'';
+const cpill=(s)=>s==='SU'||s==='present'?'ok':s==='EC'||s==='absent'?'bad':s==='retard'?'gold':'blue';
+const statusLabel=s=>({present:'Présent',retard:'Retard',absent:'Absent',stage:'Stage',exam:'Examen',early:'Départ hâtif'}[s]||s);
+const dateFR=d=>{if(!d)return '—';const p=d.split('-');return p.length===3?`${p[2]}-${p[1]}-${p[0]}`:d};
+const minutes=t=>{if(!/^\d\d:\d\d$/.test(t||''))return NaN;const [h,m]=t.split(':').map(Number);return h*60+m};
+const hours=n=>Math.max(0,n/60);
+const roundLate=(time,session)=>{const base=minutes(val(session==='AM'?'amLate':'pmLate'));const delta=minutes(time)-base;const step=Number(val('lateStepMinutes'))||15;return delta>0?Math.ceil(delta/step)*step:0};
+const early=(time,session)=>{const end=minutes(val(session==='AM'?'amEnd':'pmEnd'));const diff=end-minutes(time);return diff>=Number(val('earlyDepartureThresholdMinutes')||15)?diff:0};
+const duration=p=>p.Statut==='absent'||!p.HeureArrivee||!p.HeureDepart?0:Math.max(0,(minutes(p.HeureDepart)-minutes(p.HeureArrivee)))/60;
+const prog=(id,code)=>{const completed=state.examens.some(e=>e.NoFiche===id&&e.CodeCompetence===code&&e.Resultat==='SU');const h=state.presences.filter(p=>p.NoFiche===id&&p.CodeCompetence===code).reduce((a,p)=>a+duration(p),0);const c=comp(code);return {h,done:completed,pct:completed?100:Math.min(100,Math.round((h/(c?.Heures||1))*100))}};
+const totals=id=>{const e=state.eleves.find(s=>s.NoFiche===id);const total=state.presences.filter(p=>p.NoFiche===id);const h=total.reduce((a,p)=>a+duration(p),0);const abs=total.filter(p=>p.Statut==='absent').length;const late=total.filter(p=>p.RetardMinutes>0).length;const passed=state.competences.filter(c=>state.examens.some(x=>x.NoFiche===id&&x.CodeCompetence===c.Code&&x.Resultat==='SU')).length;return {h,abs,late,passed,bank:e?.JoursBanque||0}};
+const save=()=>{sanitizeDemoState();try{localStorage.setItem(KEY,JSON.stringify(state))}catch(err){console.warn('Stockage local indisponible; modifications temporaires seulement',err)}render()};
+function toast(s){const e=$('toast');e.textContent=s;e.hidden=false;clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>e.hidden=true,4000)}
+function navigate(tab){if(tab==='examens')examFocus='';view=tab;render();window.scrollTo({top:0,behavior:'instant'})}
+function chooseStudent(id){if(!stu(id)){toast('Élève introuvable');return}selected=id;view='fiche';render()}
+function studentBar(){return `<div class="studentbar"><label for="globalStudent">Élève actif</label><select id="globalStudent" aria-label="Choisir un élève" onchange="chooseStudent(this.value)">${state.eleves.map(s=>`<option value="${esc(s.NoFiche)}" ${selected===s.NoFiche?'selected':''}>${esc(s.Title)} · ${esc(s.NoFiche)} · ${esc(s.Laboratoire)}</option>`).join('')}</select><button type="button" class="btn mini" onclick="openFiche(selected)">Voir cheminement</button><span class="spacer"></span><button type="button" class="btn mini" onclick="navigate('pointage')">Présences</button><button type="button" class="btn mini" onclick="navigate('examens')">Examens</button></div>`}
+function heading(sub=''){ return view==='reglages' ? `<div class="top"><div><h1>${esc(TITLES[view])}</h1></div></div>` : `<div class="top"><div><h1>${esc(TITLES[view])}</h1><div class="muted">${esc(sub||'SuiviPhotoDEP · Prototype interactif sans connexion à l’école')}</div></div><span class="badge">DÉMO · données fictives</span></div>`}
+function panel(title,inner,subtitle=''){return `<section class="panel"><h2>${esc(title)}</h2>${subtitle?`<p class="subtitle">${esc(subtitle)}</p>`:''}${inner}</section>`}
+function field(label,id,control){return `<div class="field"><label for="${id}">${esc(label)}</label>${control}</div>`}
+function input(id,type,value='',attrs=''){return `<input id="${id}" type="${type}" value="${esc(value)}" ${attrs}>`}
+function select(id,options,attrs=''){return `<select id="${id}" ${attrs}>${options}</select>`}
+function tbody(rows,columns){return `<div class="tablewrap"><table><thead><tr>${columns.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.join('')||`<tr><td colspan="${columns.length}" class="empty">Aucune donnée</td></tr>`}</tbody></table></div>`}
+function render(){
+ $('nav').innerHTML=PAGES.map(([id,ico,label])=>`<button type="button" class="${view===id?'active':''}" aria-current="${view===id?'page':'false'}" onclick="navigate('${id}')"><span class="ni">${ico}</span>${label}</button>`).join('');
+ let h=heading()+(view==='reglages'?'':studentBar());
+ switch(view){case 'accueil':h+=home();break;case 'pointage':h+=pointage();break;case 'presences':h+=presences();break;case 'eleves':h+=eleves();break;case 'fiche':h+=fiche();break;case 'journal':h+=journal();break;case 'examens':h+=examens();break;case 'rapports':h+=rapports();break;case 'calendrier':h+=calendrier();break;case 'reglages':h+=reglages();break;case 'import':h+=importer();break;case 'portail':h+=portail();break}
+ $('screen').innerHTML=h;
+}
+// V1.1 : alertes explicites, calculées uniquement sur les enregistrements existants.
+// Les séances non saisies ne sont jamais considérées comme des absences.
+function alertSummary(records=state.presences,students=state.eleves){
+ const active=new Set(students.filter(s=>s.Actif).map(s=>s.NoFiche));
+ const rows=records.filter(p=>active.has(p.NoFiche));
+ const absences=rows.filter(p=>p.Statut==='absent');
+ const retards=rows.filter(p=>Number(p.RetardMinutes)>0);
+ const incomplete=rows.filter(p=>p.Statut!=='absent'&&p.Statut!=='stage'&&(!p.HeureArrivee||!p.HeureDepart));
+ const byStudent=students.filter(s=>s.Actif).map(s=>({id:s.NoFiche,name:s.Title,lab:s.Laboratoire,abs:absences.filter(p=>p.NoFiche===s.NoFiche).length,late:retards.filter(p=>p.NoFiche===s.NoFiche).length,partial:incomplete.filter(p=>p.NoFiche===s.NoFiche).length}));
+ return {absences:absences.length,retards:retards.length,incomplete:incomplete.length,byStudent};
+}
+function weeklyCompleteness(date,lab='TOUS'){
+ const days=weekDates(date);let entered=0,missing=0,off=0;
+ for(const day of days){
+  for(const r of dailyPresenceRows(day,lab)){
+   if(!r.eligible){off++;continue}
+   if(r.record)entered++;else missing++;
+  }
+ }
+ return {entered,missing,off,days};
+}
+function alertPanel(){
+ const a=alertSummary(),r=a.byStudent.map(s=>`<tr><td><button class="linkbutton" onclick="openFiche('${s.id}')">${esc(s.name)}</button><div class="muted">${esc(s.id)} · ${esc(s.lab)}</div></td><td>${s.abs}</td><td>${s.late}</td><td>${s.partial}</td></tr>`);
+ return panel('Vigilance et suivis',`<div class="cards"><div class="card"><small>Absences enregistrées</small><div class="num">${a.absences}</div></div><div class="card"><small>Retards enregistrés</small><div class="num">${a.retards}</div></div><div class="card"><small>Pointages incomplets</small><div class="num">${a.incomplete}</div></div></div>${tbody(r,['Élève','Absences AM/PM','Retards AM/PM','Pointages partiels'])}<p class="footnote">Indicateurs fondés sur les saisies explicites. Aucun seuil disciplinaire ni absence présumée.</p>`);
+}
+function reportCompletenessPanel(){
+ const a=weeklyCompleteness(filterDate||'2026-11-10',labFilter);
+ return panel('Contrôle de complétude',`<div class="cards"><div class="card"><small>Séances enregistrées</small><div class="num">${a.entered}</div></div><div class="card"><small>Séances non saisies</small><div class="num">${a.missing}</div></div><div class="card"><small>Hors calendrier</small><div class="num">${a.off}</div></div></div><p class="footnote">Semaine du ${dateFR(a.days[0])}. Les séances non saisies ne sont pas des absences. Vérifier les horaires et congés avant export.</p>`);
+}
+function home(){const a=state.eleves.filter(s=>s.Actif),totalPres=state.presences.length,ab=state.presences.filter(s=>s.Statut==='absent').length,ex=state.examens.filter(e=>e.Resultat==='SU').length;
+ return `<div class="hero"><h2>Bienvenue dans SuiviPhotoDEP</h2><p>Retrouvez les gestes de l’application d’origine : ouvrir un élève, pointer, corriger une présence, enregistrer un examen et obtenir un rapport.</p></div><div class="cards"><div class="card"><small>Élèves actifs</small><div class="num">${a.length}</div><span class="muted">LAB1 + LAB2</span></div><div class="card"><small>Demi-journées saisies</small><div class="num">${totalPres}</div></div><div class="card"><small>Absences</small><div class="num">${ab}</div></div><div class="card"><small>Examens réussis</small><div class="num">${ex}</div></div></div>${panel('Accès direct',`<div class="quicknav"><button onclick="navigate('pointage')">+ Pointer un élève</button><button onclick="navigate('eleves')">Ouvrir une fiche</button><button onclick="navigate('examens')">+ Enregistrer un examen</button><button onclick="navigate('rapports')">Produire un rapport</button></div>`)}${alertPanel()}${panel('Élèves de démonstration',`<div class="mini-list">${state.eleves.map(s=>`<div class="mini-row"><div><strong>${esc(s.Title)}</strong><div class="muted">${s.NoFiche} · ${s.Laboratoire} · ${totals(s.NoFiche).h.toFixed(1)} h enregistrées</div></div><button class="btn mini" onclick="openFiche('${s.NoFiche}')">Ouvrir la fiche</button></div>`).join('')}</div>`)}<p class="footnote">Les données sont conservées uniquement dans ce navigateur. Ceci n’est PAS l’application Power Apps publiée ni un portail d’élèves sécurisé.</p>`}
+function pointage(){const t=stu(selected)||state.eleves[0];return `<div class="cols"><section class="panel"><h2>Pointage AM / PM</h2><p class="subtitle">Saisie rapide, comme au poste de pointage de l’application Web.</p><form class="form" onsubmit="return doPointage(event)"><div class="formgrid two">${field('Date', 'ptDate',input('ptDate','date',filterDate,'required'))}${field('Laboratoire','ptLab',select('ptLab',opts([['LAB1','LAB1 · J01'],['LAB2','LAB2 · J02']],t.Laboratoire),'onchange="filterPointageLab()"'))}</div>${field('Élève (numéro de fiche)','ptStudent',select('ptStudent',stopts(t.NoFiche),'onchange="changeStudentPointage()"'))}${field('Compétence','ptComp',select('ptComp',cpOpts('474-215')))}<div class="formgrid two">${field('Demi-journée','ptSession',select('ptSession',opts([['AM','AM · matin'],['PM','PM · après-midi']],'AM'),'onchange="defaultTime()"'))}${field('Heure','ptTime',input('ptTime','time','08:15','required'))}</div><div class="actions"><button class="btn primary" type="submit" name="mode" value="arrival">Enregistrer l’arrivée</button><button class="btn" type="button" onclick="doPointage(event,'departure')">Enregistrer le départ</button></div><div class="hint">Un seul enregistrement AM et PM par élève et par date. Un deuxième clic met à jour l’arrivée ou le départ après confirmation.</div></form></section><section class="panel"><h2>État du pointage</h2><p class="subtitle">Appuyez sur une fiche pour afficher le cheminement.</p><div class="mini-list">${state.eleves.map(s=>{const tot=totals(s.NoFiche);return `<div class="mini-row"><div><strong>${esc(s.Title)}</strong><div class="muted">${s.Laboratoire} · ${tot.h.toFixed(1)} h · ${tot.late} retard(s)</div></div><button class="btn mini" onclick="openFiche('${s.NoFiche}')">Fiche</button></div>`}).join('')}</div></section></div>`}
+function changeStudentPointage(){selected=$('ptStudent').value;const s=stu(selected);if(s)$('ptLab').value=s.Laboratoire}
+function filterPointageLab(){const l=$('ptLab').value;const s=state.eleves.find(e=>e.Laboratoire===l);if(s){$('ptStudent').value=s.NoFiche;selected=s.NoFiche}}
+function defaultTime(){ $('ptTime').value=$('ptSession').value==='AM'?val('amStart'):val('pmStart') }
+function doPointage(evt,mode='arrival'){evt?.preventDefault?.();const id=$('ptStudent').value,s=stu(id),date=$('ptDate').value,session=$('ptSession').value,time=$('ptTime').value,code=$('ptComp').value;if(!s||!date||!time||!comp(code)){toast('Champ requis ou compétence inconnue.');return false}if(s.Laboratoire!==$('ptLab').value){toast('Le laboratoire sélectionné ne correspond pas à celui de l’élève.');return false}const cle=`${id}|${date}|${session}`;let p=state.presences.find(x=>x.ClePointage===cle);const existing=p&&p[mode==='arrival'?'HeureArrivee':'HeureDepart'];if(existing&&!confirm('Ce pointage existe déjà. Remplacer cette heure?'))return false;if(!p){p={ClePointage:cle,NoFiche:id,DateJour:date,Laboratoire:s.Laboratoire,Session:session,HeureArrivee:'',HeureDepart:'',CodeCompetence:code,Statut:'present',RetardMinutes:0,DepartHatifMinutes:0};state.presences.push(p)}p.CodeCompetence=code;p.Statut='present';if(mode==='arrival'){p.HeureArrivee=time;p.RetardMinutes=roundLate(time,session);p.Statut=p.RetardMinutes>0?'retard':'present'}else{p.HeureDepart=time;p.DepartHatifMinutes=early(time,session)}if(p.HeureArrivee&&p.HeureDepart&&minutes(p.HeureDepart)<minutes(p.HeureArrivee)){if(mode==='arrival'){p.HeureArrivee=existing||'';p.RetardMinutes=p.HeureArrivee?roundLate(p.HeureArrivee,session):0}else{p.HeureDepart=existing||'';p.DepartHatifMinutes=p.HeureDepart?early(p.HeureDepart,session):0}if(!p.HeureArrivee&&!p.HeureDepart)state.presences=state.presences.filter(x=>x!==p);toast('Heure refusée : le départ ne peut pas précéder l’arrivée.');return false}filterDate=date;selected=id;save();toast(`Pointage ${mode==='arrival'?'arrivée':'départ'} sauvegardé : ${s.Title}, ${session}.`);return false}
+// V1.0 : grille quotidienne explicite, y compris les séances non saisies.
+function dailyPresenceRows(date,lab='TOUS'){
+ if(!isIsoDate(date))return [];
+ return state.eleves.filter(s=>s.Actif&&(lab==='TOUS'||s.Laboratoire===lab))
+ .flatMap(s=>['AM','PM'].map(session=>{
+  const key=`${s.NoFiche}|${date}|${session}`;
+  const record=state.presences.find(p=>p.ClePointage===key);
+  return {key,id:s.NoFiche,name:s.Title,lab:s.Laboratoire,session,record,
+   status:record?record.Statut:'non_saisi',eligible:labSchoolDay(date,s.Laboratoire).eligible};
+ }));
+}
+function quickAbsence(id,date,session){
+ const s=stu(id),key=`${id}|${date}|${session}`;
+ if(!s||!isIsoDate(date)||!['AM','PM'].includes(session)){toast('Séance invalide');return false}
+ if(!labSchoolDay(date,s.Laboratoire).eligible){toast('Journée non admissible pour ce groupe');return false}
+ if(state.presences.some(p=>p.ClePointage===key)){toast('Séance déjà saisie : utilisez Corriger');return false}
+ const code=state.competences.find(c=>c.Actif&&!prog(id,c.Code).done)?.Code||state.competences[0]?.Code;
+ if(!code)return false;
+ state.presences.push({ClePointage:key,NoFiche:id,DateJour:date,Laboratoire:s.Laboratoire,Session:session,HeureArrivee:'',HeureDepart:'',CodeCompetence:code,Statut:'absent',RetardMinutes:0,DepartHatifMinutes:0});
+ save();toast('Absence fictive enregistrée');return true;
+}
+function dailyPresencePanel(){
+ const rows=dailyPresenceRows(filterDate,labFilter),missing=rows.filter(r=>!r.record&&r.eligible).length;
+ const table=rows.map(r=>`<tr><td>${esc(r.lab)}</td><td><button class="linkbutton" onclick="openFiche('${r.id}')">${esc(r.name)}</button><div class="muted">${r.id}</div></td><td>${r.session}</td><td><span class="pill ${r.status==='non_saisi'?'gold':cpill(r.status)}">${r.eligible?(r.record?statusLabel(r.status):'Non saisi'):'Hors calendrier'}</span></td><td>${r.record?esc(r.record.HeureArrivee||'—'):'—'}</td><td>${r.record?esc(r.record.HeureDepart||'—'):'—'}</td><td>${r.record?`<button class="btn mini" onclick="editPresence('${r.key}')">Corriger</button>`:r.eligible?`<button class="btn mini" onclick="quickAbsence('${r.id}','${filterDate}','${r.session}')">Absence</button>`:'—'}</td></tr>`);
+ return panel('Vue quotidienne AM / PM',tbody(table,['Groupe','Élève','Séance','État','Arrivée','Départ','Action']),`${rows.length} séances affichées · ${missing} séance(s) admissible(s) sans pointage. « Non saisi » ne signifie pas « absent ».`);
+}
+function presences(){const dates=[...new Set(state.presences.map(p=>p.DateJour))].sort().reverse();let show=state.presences.filter(p=>(!filterDate||p.DateJour===filterDate)&&(labFilter==='TOUS'||p.Laboratoire===labFilter));const r=show.sort((a,b)=>a.Laboratoire.localeCompare(b.Laboratoire)||a.NoFiche.localeCompare(b.NoFiche)||a.Session.localeCompare(b.Session)).map(p=>`<tr><td>${esc(p.Laboratoire)}</td><td><button class="linkbutton" onclick="openFiche('${p.NoFiche}')">${esc(stu(p.NoFiche)?.Title||p.NoFiche)}</button><div class="muted">${esc(p.NoFiche)} · ${p.Session}</div></td><td><span class="pill ${cpill(p.Statut)}">${statusLabel(p.Statut)}</span></td><td>${esc(p.HeureArrivee||'—')}</td><td>${esc(p.HeureDepart||'—')}</td><td>${esc(p.CodeCompetence)}</td><td><button class="btn mini" onclick="editPresence('${p.ClePointage}')">Corriger</button></td></tr>`);
+return `<div class="panel"><div class="titlebar"><div><h2>Présences par date</h2><div class="muted">Corrigez une demi-journée dans une fenêtre claire.</div></div><button class="btn primary" onclick="markAbsence()">+ Inscrire une absence</button></div><div class="searchbar">${input('psDate','date',filterDate,'onchange="filterDate=this.value;render()"')}${select('psLab',opts([['TOUS','Tous les groupes'],['LAB1','LAB1'],['LAB2','LAB2']],labFilter),'onchange="labFilter=this.value;render()"')}<button class="btn" onclick="filterDate='';render()">Toutes les dates</button></div></div>${dailyPresencePanel()}${panel('Demi-journées enregistrées',tbody(r,['Groupe','Élève · séance','Statut','Arrivée','Départ','Compétence','Action']),`${show.length} demi-journée(s) trouvée(s)`)} `}
+function editPresence(key){const p=state.presences.find(x=>x.ClePointage===key);if(!p)return;let h=`<h2>Corriger une présence</h2><p class="muted">${esc(stu(p.NoFiche)?.Title)} · ${dateFR(p.DateJour)} · ${p.Session}</p><form class="form" onsubmit="return savePresence(event,'${key}')"><div class="formgrid two">${field('Statut','edStatus',select('edStatus',opts([['present','Présent'],['retard','Retard'],['absent','Absent'],['stage','Stage']],p.Statut)))}${field('Compétence','edComp',select('edComp',cpOpts(p.CodeCompetence)))}</div><div class="formgrid two">${field('Arrivée','edIn',input('edIn','time',p.HeureArrivee))}${field('Départ','edOut',input('edOut','time',p.HeureDepart))}</div><div class="actions"><button class="btn primary" type="submit">Enregistrer</button><button class="btn" type="button" onclick="closeModal()">Annuler</button><button class="btn danger" type="button" onclick="deletePresence('${key}')">Supprimer la saisie</button></div></form>`;modal(h)}
+function savePresence(evt,key){evt.preventDefault();const p=state.presences.find(x=>x.ClePointage===key);if(!p)return false;const avantCorrection={...p};p.Statut=$('edStatus').value;p.CodeCompetence=$('edComp').value;p.HeureArrivee=p.Statut==='absent'?'':$('edIn').value;p.HeureDepart=p.Statut==='absent'?'':$('edOut').value;if(p.HeureArrivee&&p.HeureDepart&&minutes(p.HeureDepart)<minutes(p.HeureArrivee)){Object.assign(p,avantCorrection);toast('Correction refusée : départ avant arrivée.');return false}p.RetardMinutes=p.Statut==='absent'?0:p.HeureArrivee?roundLate(p.HeureArrivee,p.Session):0;p.DepartHatifMinutes=p.Statut==='absent'?0:p.HeureDepart?early(p.HeureDepart,p.Session):0;if(p.Statut!=='absent'&&p.Statut!=='stage')p.Statut=p.RetardMinutes>0?'retard':'present';closeModal();save();toast('Présence corrigée et bilans actualisés.');return false}
+function deletePresence(key){if(!confirm('Supprimer ce pointage fictif?'))return;state.presences=state.presences.filter(p=>p.ClePointage!==key);closeModal();save();toast('Saisie supprimée')}
+function markAbsence(){modal(`<h2>Inscrire une absence</h2><form class="form" onsubmit="return saveAbsence(event)"><div class="formgrid two">${field('Élève','abS',select('abS',stopts(selected)))}${field('Date','abD',input('abD','date',filterDate||'2026-11-10','required'))}${field('Session','abA',select('abA',opts([['AM','Matin'],['PM','Après-midi']],'AM')))}${field('Compétence','abC',select('abC',cpOpts('474-215')))}</div><div class="actions"><button class="btn primary">Enregistrer l’absence</button><button type="button" class="btn" onclick="closeModal()">Annuler</button></div></form>`)}
+function saveAbsence(evt){evt.preventDefault();const id=$('abS').value,d=$('abD').value,a=$('abA').value,key=`${id}|${d}|${a}`;if(!DEMO_IDS.has(id)||!isIsoDate(d)||!['AM','PM'].includes(a)||!labSchoolDay(d,stu(id)?.Laboratoire).eligible){toast('Absence refusée : élève, date ou séance non admissible.');return false}if(state.presences.some(p=>p.ClePointage===key)){toast('Une séance existe déjà. Utilisez « Corriger ».');return false}const s=stu(id);state.presences.push({ClePointage:key,NoFiche:id,DateJour:d,Laboratoire:s.Laboratoire,Session:a,HeureArrivee:'',HeureDepart:'',CodeCompetence:$('abC').value,Statut:'absent',RetardMinutes:0,DepartHatifMinutes:0});filterDate=d;closeModal();save();toast('Absence enregistrée');return false}
+function eleves(){const shown=state.eleves.filter(s=>(labFilter==='TOUS'||s.Laboratoire===labFilter)&&`${s.NoFiche} ${s.Title}`.toLowerCase().includes(search.toLowerCase()));const rows=shown.map(s=>{const t=totals(s.NoFiche);return `<tr><td><button class="linkbutton" onclick="openFiche('${s.NoFiche}')">${esc(s.Title)}</button><div class="muted">${esc(s.NoFiche)}</div></td><td>${s.Laboratoire}</td><td><span class="pill ${s.Actif?'ok':'bad'}">${s.Statut}</span></td><td>${t.h.toFixed(1)} h</td><td>${t.abs}</td><td>${t.late}</td><td>${t.passed} / 24</td><td><button class="btn mini" onclick="openFiche('${s.NoFiche}')">Voir fiche</button></td></tr>`});return `<div class="panel"><div class="titlebar"><h2>Liste des élèves</h2><button class="btn primary" onclick="addStudent()">+ Ajouter un élève</button></div><div class="searchbar"><input value="${esc(search)}" placeholder="Rechercher un nom ou un numéro…" oninput="search=this.value;renderPreserveFocus()" aria-label="Rechercher">${select('eLab',opts([['TOUS','Tous les groupes'],['LAB1','LAB1'],['LAB2','LAB2']],labFilter),'onchange="labFilter=this.value;render()"')}</div></div>${panel('Fiches des élèves',tbody(rows,['Élève','Groupe','Statut','Heures','Abs.','Retards','Réussies','Action']),`${shown.length} dossier(s) trouvé(s)`)} `}
+function renderPreserveFocus(){const el=document.activeElement;const pos=el.selectionStart;render();const n=document.querySelector('.searchbar input');if(n){n.focus();n.setSelectionRange(pos,pos)}}
+function addStudent(){modal(`<h2>Ajouter un élève fictif</h2><form class="form" onsubmit="return saveNewStudent(event)">${field('No de fiche — 7 chiffres','nsId',input('nsId','text','','maxlength="7" pattern="[0-9]{7}" required'))}${field('Nom complet','nsName',input('nsName','text','','required minlength="3"'))}${field('Laboratoire','nsLab',select('nsLab',opts([['LAB1','LAB1'],['LAB2','LAB2']],'LAB1')))}<div class="actions"><button class="btn primary">Créer le dossier</button><button class="btn" type="button" onclick="closeModal()">Annuler</button></div></form>`)}
+function saveNewStudent(evt){evt.preventDefault();toast('Démo limitée à Camille et Alex : aucun autre dossier autorisé.');return false;}
+function openFiche(id){selected=id;view='fiche';render();window.scrollTo(0,0)}
+function openCompetence(code){if(!comp(code)){toast('Compétence introuvable');return}focusComp=code;view='fiche';render();}
+function examForCompetence(code){if(!comp(code)){toast('Compétence introuvable');return}examFocus=code;view='examens';render();updateExamNum()}
+function openCompetenceRecord(id,code){return state.competencesOuvertes.find(x=>x.NoFiche===id&&x.CodeCompetence===code&&x.Statut==='ouverte')}
+function toggleCompetence(code){
+ const s=stu(selected),c=comp(code);if(!s||!c){toast('Élève ou compétence introuvable');return false}
+ const current=openCompetenceRecord(selected,code);
+ if(!current&&prog(selected,code).done){toast('Compétence réussie : ouverture refusée');return false}
+ if(current){if(!confirm('Fermer cette compétence? Les présences et examens sont conservés.'))return false;current.Statut='fermee';current.DateFermeture=new Date().toISOString().slice(0,10)}
+ else {state.competencesOuvertes.push({CleOuverture:selected+'|'+code+'|'+(state.competencesOuvertes.filter(x=>x.NoFiche===selected&&x.CodeCompetence===code).length+1),NoFiche:selected,CodeCompetence:code,Statut:'ouverte',DateOuverture:new Date().toISOString().slice(0,10),DateFermeture:''})}
+ save();toast(current?'Compétence fermée':'Compétence ouverte');return false
+}
+// Calendrier V0.7 : jours admissibles par groupe, en mode DEMO uniquement.
+// Les jours fériés sont exclus; les jours non saisis ne sont PAS présumés validés.
+const GROUP_WEEKDAYS={LAB1:[1,2,3,4],LAB2:[1,2,3,4]}; // lundi à jeudi : hypothèse de démonstration
+function isIsoDate(s){return /^\d{4}-\d{2}-\d{2}$/.test(s)&&!Number.isNaN(new Date(s+'T12:00:00').getTime())&&new Date(s+'T12:00:00').toISOString().slice(0,10)===s}
+function schoolDayInfo(date,lab){
+ if(!isIsoDate(date)||!GROUP_WEEKDAYS[lab])return {eligible:false,reason:'Date ou groupe invalide'};
+ const dow=new Date(date+'T12:00:00').getDay();
+ if(!GROUP_WEEKDAYS[lab].includes(dow))return {eligible:false,reason:'Hors horaire du groupe'};
+ const holiday=state.joursFeries.find(h=>h.DateJour===date);
+ if(holiday)return {eligible:false,reason:'Sans cours : '+holiday.Title};
+ return {eligible:true,reason:'Cours théorique — non validé'};
+}
+function weekCalendarInfo(date,lab){
+ if(!isIsoDate(date)||!GROUP_WEEKDAYS[lab])return [];
+ const start=new Date(date+'T12:00:00');start.setDate(start.getDate()-((start.getDay()+6)%7));
+ return Array.from({length:7},(_,i)=>{const d=new Date(start);d.setDate(start.getDate()+i);const day=d.toISOString().slice(0,10);return {date:day,...schoolDayInfo(day,lab)}});
+}
+function groupCalendarPanel(id){
+ const s=stu(id);if(!s)return '';
+ const days=weekCalendarInfo(filterDate||'2026-11-10',s.Laboratoire);
+ const count=days.filter(d=>d.eligible).length;
+ const inner=`<p>Groupe ${esc(s.Laboratoire)} · ${count} journée(s) théoriquement admissible(s) cette semaine. Horaire provisoire : lundi au jeudi.</p><div class="mini-list">${days.map(d=>`<div class="mini-row"><span>${dateFR(d.date)}</span><span class="pill ${d.eligible?'ok':'bad'}">${esc(d.reason)}</span></div>`).join('')}</div><p class="hint">Les journées en banque (${Number(s.JoursBanque)||0}) ne sont pas déduites automatiquement. Calendrier incomplet : aucune date de fin ou d’examen ne peut être garantie.</p>`;
+ return panel('Calendrier LAB1 / LAB2 — simulation',inner);
+}
+// Projection prudente : unités de cours seulement, aucune date sans calendrier officiel.
+function projectionCours(id){
+ const student=stu(id);if(!student)return {rows:[],total:0};
+ const rows=state.competencesOuvertes.filter(x=>x.NoFiche===id&&x.Statut==='ouverte').map(x=>{
+   const c=comp(x.CodeCompetence);if(!c)return null;
+   const p=prog(id,c.Code),remaining=p.done?0:Math.max(0,c.Heures-p.h);
+   const am=minutes(val('amEnd'))-minutes(val('amStart'));
+   const pm=minutes(val('pmEnd'))-minutes(val('pmStart'));
+   const dailyHours=(am+pm)/60;
+   const valid=Number.isFinite(dailyHours)&&dailyHours>0&&dailyHours<=12;
+   return {code:c.Code,title:c.Title,remaining,days:valid?Math.ceil(remaining/dailyHours):null,dailyHours};
+ }).filter(Boolean);
+ return {rows,total:rows.reduce((a,r)=>a+r.remaining,0)};
+}
+function projectionPanel(id){
+ const p=projectionCours(id);
+ const content=p.rows.length?`<div class="mini-list">${p.rows.map(r=>`<div class="mini-row"><div><strong>${esc(r.code)} · ${esc(r.title)}</strong><div class="muted">${r.remaining.toFixed(1)} h restantes · ${r.days===null?'Horaire incomplet':r.days+' journées théoriques'} (calcul isolé)</div></div><button class="btn mini" onclick="openCompetence('${r.code}')">Voir</button></div>`).join('')}</div><p class="footnote">Total des heures restantes sur les compétences ouvertes : ${p.total.toFixed(1)} h. Les journées théoriques ne s’additionnent pas si plusieurs compétences sont suivies en parallèle. Les horaires utilisés sont ceux des réglages de démonstration, non des horaires LAB1/LAB2 certifiés.</p>`:'<p class="muted">Aucune compétence ouverte. Ouvrez une compétence pour consulter ses heures restantes.</p>';
+ return panel('Prévision indicative des compétences ouvertes',content+'<div class="hint">Aucune date d’examen ou de fin calculée : calendrier scolaire complet, jours de cours propres au groupe, banque et règles de planification à valider.</div>');
+}
+function openSummary(id){const list=state.competencesOuvertes.filter(x=>x.NoFiche===id&&x.Statut==='ouverte');return list.map(x=>{const c=comp(x.CodeCompetence),p=prog(id,x.CodeCompetence);return `<div class="mini-row"><div><strong>${esc(x.CodeCompetence)} · ${esc(c?.Title||'')}</strong><div class="muted">${p.h.toFixed(1)} / ${c?.Heures||0} h · ${Math.max(0,(c?.Heures||0)-p.h).toFixed(1)} h restantes (indicatif)</div></div><button class="btn mini" onclick="openCompetence('${x.CodeCompetence}')">Détails</button></div>`}).join('')||'<p class="muted">Aucune compétence ouverte. Sélectionnez une compétence dans le tableau pour l’ouvrir.</p>'}
+function competenceDetail(){const c=comp(focusComp)||state.competences[0],v=prog(selected,c.Code),entries=state.presences.filter(p=>p.NoFiche===selected&&p.CodeCompetence===c.Code).sort((a,b)=>b.DateJour.localeCompare(a.DateJour)),attempts=state.examens.filter(e=>e.NoFiche===selected&&e.CodeCompetence===c.Code).sort((a,b)=>a.Tentative-b.Tentative),remaining=Math.max(0,c.Heures-v.h),opened=openCompetenceRecord(selected,c.Code);return panel('Détail de la compétence',`<div class="inset"><strong>${esc(c.Code)} · ${esc(c.Title)}</strong><p>${esc(c.Bloc)} · Cible : ${c.Heures} h · Heures pointées : ${v.h.toFixed(1)} h · Reste indicatif : ${remaining.toFixed(1)} h</p><div class="progress"><span style="width:${v.pct}%"></span></div><p><strong>Suivi : ${opened?'Ouverte depuis '+dateFR(opened.DateOuverture):'Non ouverte'}</strong></p><button class="btn" onclick="toggleCompetence('${c.Code}')" ${v.done&&!opened?'disabled':''}>${opened?'Fermer la compétence':'Ouvrir la compétence'}</button><p>${v.done?'Compétence réussie (SU)':'Compétence non encore réussie'} · ${v.pct}% affiché</p><button class="btn primary" onclick="examForCompetence('${c.Code}')" ${v.done?'disabled title="Déjà réussie"':''}>${v.done?'Examen réussi':'Enregistrer un examen pour cette compétence'}</button></div><h3>Tentatives d’examen</h3>${tbody(attempts.map(e=>`<tr><td>${e.Tentative}</td><td>${dateFR(e.DateExamen)}</td><td><span class="pill ${cpill(e.Resultat)}">${e.Resultat}</span></td></tr>`),['Tentative','Date','Résultat'])}<h3>Pointages associés</h3>${tbody(entries.map(e=>`<tr><td>${dateFR(e.DateJour)}</td><td>${e.Session}</td><td>${esc(statusLabel(e.Statut))}</td><td>${duration(e).toFixed(2)} h</td></tr>`),['Date','Session','Statut','Durée'])}`,'Les heures sont calculées uniquement à partir des pointages de démonstration. Les heures historiques et reprises ne sont pas incluses.')}
+function fiche(){const s=stu(selected);if(!s)return '<p>Élève introuvable.</p>';const t=totals(selected);const cs=state.competences.map(c=>{const v=prog(selected,c.Code);const exams=state.examens.filter(e=>e.NoFiche===selected&&e.CodeCompetence===c.Code);const result=exams.at(-1)?.Resultat||'—';return `<tr><td>${c.Ordre}</td><td><button class="btn mini" onclick="openCompetence('${c.Code}')" aria-label="Détails ${esc(c.Code)}">${esc(c.Code)}</button><div class="muted">${esc(c.Title)}</div></td><td>${c.Heures} h</td><td>${v.h.toFixed(1)} h</td><td><div class="progress"><span style="width:${v.pct}%"></span></div><small>${v.pct}%</small></td><td><span class="pill ${cpill(result)}">${result}</span></td><td><button class="btn mini" onclick="openCompetence('${c.Code}')">Détails</button></td></tr>`});return `<div class="actions"><button class="btn" onclick="navigate('eleves')">← Tous les élèves</button><button class="btn primary" onclick="editStudent()">Modifier la fiche</button><button class="btn" onclick="navigate('examens')">+ Examen</button></div><div class="hero" style="margin-top:15px"><h2>${esc(s.Title)}</h2><p>${s.NoFiche} · ${s.Laboratoire} · ${esc(s.Statut)}</p></div><div class="cards"><div class="card"><small>Heures pointées</small><div class="num">${t.h.toFixed(1)} h</div></div><div class="card"><small>Compétences réussies</small><div class="num">${t.passed} / 24</div></div><div class="card"><small>Demi-journées absentes</small><div class="num">${t.abs}</div></div><div class="card"><small>Journées en banque</small><div class="num">${t.bank}</div></div></div>${panel('Cheminement par compétence',tbody(cs,['N°','Compétence','Cible','Heures pointées','Progression','Examen','Action']),'Sélectionnez une compétence pour afficher ses pointages et tentatives d’examen.')}${panel('Compétences ouvertes',openSummary(selected),'Suivi manuel des compétences actives; les heures restantes sont indicatives.')} ${competenceDetail()}${projectionPanel(selected)}${groupCalendarPanel(selected)}${panel('Date de fin prévue','<p class="warn">Calendrier scolaire officiel des années futures requis pour produire une date fiable.</p>')}`}
+
+function editStudent(){const s=stu(selected);modal(`<h2>Modifier la fiche</h2><form class="form" onsubmit="return saveStudent(event)">${field('Nom','stName',input('stName','text',s.Title,'required'))}${field('Laboratoire','stLab',select('stLab',opts([['LAB1','LAB1'],['LAB2','LAB2']],s.Laboratoire)))}${field('Statut','stStatus',select('stStatus',opts([['active','Actif'],['temporary_stop','Arrêt temporaire'],['archived','Archivé']],s.Statut)))}${field('Journées en banque','stBank',input('stBank','number',s.JoursBanque,'step="1" min="0"'))}<div class="actions"><button class="btn primary">Enregistrer la fiche</button><button class="btn" type="button" onclick="closeModal()">Annuler</button></div></form>`)}
+function saveStudent(evt){evt.preventDefault();const s=stu(selected);s.Title=$('stName').value.trim();if(s.Laboratoire!==$('stLab').value&&state.presences.some(p=>p.NoFiche===s.NoFiche)){toast('Groupe non modifié : des présences existent. Corrigez-les avant le transfert.');return false}s.Laboratoire=$('stLab').value;s.Statut=$('stStatus').value;s.Actif=s.Statut==='active';s.JoursBanque=Number($('stBank').value||0);closeModal();save();toast('Fiche modifiée');return false}
+function journal(){const sorted=[...state.presences].sort((a,b)=>b.DateJour.localeCompare(a.DateJour)||a.Laboratoire.localeCompare(b.Laboratoire));const r=sorted.filter(p=>(labFilter==='TOUS'||p.Laboratoire===labFilter)&&(!search||`${p.NoFiche} ${stu(p.NoFiche)?.Title}`.toLowerCase().includes(search.toLowerCase()))).map(p=>`<tr><td>${dateFR(p.DateJour)}</td><td>${p.Laboratoire}</td><td>${esc(stu(p.NoFiche)?.Title||p.NoFiche)}<div class="muted">${p.NoFiche}</div></td><td>${p.Session}</td><td>${p.HeureArrivee||'—'}</td><td>${p.HeureDepart||'—'}</td><td>${p.CodeCompetence}</td><td><span class="pill ${cpill(p.Statut)}">${statusLabel(p.Statut)}</span></td></tr>`);return `${panel('Historique de pointage',`<div class="searchbar"><input value="${esc(search)}" placeholder="Nom ou fiche" oninput="search=this.value;renderPreserveFocus()">${select('jLab',opts([['TOUS','Tous les groupes'],['LAB1','LAB1'],['LAB2','LAB2']],labFilter),'onchange="labFilter=this.value;render()"')}</div>`, 'Historique de démonstration : toutes les dates disponibles')}${panel('Journal',tbody(r,['Date','Groupe','Élève','Séance','Arrivée','Départ','Compétence','Statut']))}`}
+function examens(){const x=[...state.examens].sort((a,b)=>b.DateExamen.localeCompare(a.DateExamen));return `<div class="cols"><section class="panel"><h2>Enregistrer une tentative</h2><form class="form" onsubmit="return saveExam(event)">${field('Élève','xStudent',select('xStudent',stopts(selected),'onchange="updateExamNum()"'))}${field('Compétence','xCode',select('xCode',cpOpts(examFocus||'474-215'),'onchange="examFocus=this.value;updateExamNum()"'))}<div class="formgrid two">${field('Date de l’examen','xDate',input('xDate','date','2026-11-12','required'))}${field('Résultat','xResult',select('xResult',opts([['SU','SU · Réussi'],['EC','EC · Échec']],'SU')))}</div><div class="inset" id="nextAttempt">Numéro de tentative calculé automatiquement</div><div class="actions"><button type="submit" class="btn primary">Enregistrer l’examen</button></div></form></section><section class="panel"><h2>Règles</h2><p>Le résultat <strong>SU</strong> complète la compétence et affiche 100 % dans le cheminement. Le résultat <strong>EC</strong> laisse la compétence ouverte.</p><p>Les tentatives sont numérotées automatiquement, sans créer de doublon.</p><p class="hint">Les jours de reprise, conditions d’ouverture complexes et modifications d’examens historiques nécessitent l’intégration complète des règles originales dans l’app Power Apps.</p></section></div>${panel('Historique des examens',tbody(x.map(e=>`<tr><td>${dateFR(e.DateExamen)}</td><td>${esc(stu(e.NoFiche)?.Title)}</td><td>${e.CodeCompetence}</td><td>${e.Tentative}</td><td><span class="pill ${cpill(e.Resultat)}">${e.Resultat}</span></td></tr>`),['Date','Élève','Compétence','Tentative','Résultat']))}`}
+function updateExamNum(){const id=$('xStudent')?.value,code=$('xCode')?.value;const n=Math.max(0,...state.examens.filter(e=>e.NoFiche===id&&e.CodeCompetence===code).map(e=>Number(e.Tentative)))+1;const e=$('nextAttempt');if(e)e.textContent=`Prochaine tentative : ${n===1?'Examen':n===2?'Reprise 1':`Reprise ${n-1}`} (n° ${n})`}
+function saveExam(ev){ev.preventDefault();const id=$('xStudent').value,c=$('xCode').value,date=$('xDate').value,res=$('xResult').value;if(!stu(id)||!comp(c)||!date||!['SU','EC'].includes(res)){toast('Données non valides');return false}if(state.examens.some(e=>e.NoFiche===id&&e.CodeCompetence===c&&e.Resultat==='SU')){toast('Compétence déjà réussie : nouvelle tentative refusée.');return false}const n=Math.max(0,...state.examens.filter(e=>e.NoFiche===id&&e.CodeCompetence===c).map(e=>Number(e.Tentative)))+1;const key=`${id}|${c}|${n}`;if(state.examens.some(e=>e.CleExamen===key)){toast('Examen déjà enregistré');return false}state.examens.push({CleExamen:key,NoFiche:id,CodeCompetence:c,Tentative:n,DateExamen:date,Resultat:res,JoursRepriseAjoutes:false});selected=id;save();updateExamNum();toast('Examen enregistré et fiche mise à jour');return false}
+function weekDates(d){const x=new Date((d||'2026-11-09')+'T12:00:00');const dow=x.getDay(),diff=(dow+6)%7;x.setDate(x.getDate()-diff);return Array.from({length:4},(_,i)=>{const z=new Date(x);z.setDate(x.getDate()+i);return z.toISOString().slice(0,10)})}
+function hfmt(minutes_){return `${Math.floor(minutes_/60)}H${String(minutes_%60).padStart(2,'0')}`}
+function toscaRows(d){const cols=['DateJour','Laboratoire','NoFiche','NomComplet','HeureDebutAM','FinAM','RetardAM','DepartAM','CompetenceAM','HeureDebutPM','FinPM','RetardPM','DepartPM','CompetencePM'];return {cols,rows:state.eleves.filter(s=>s.Actif).map(s=>{const v={DateJour:d,Laboratoire:s.Laboratoire,NoFiche:s.NoFiche,NomComplet:s.Title};for(const session of ['AM','PM']){const p=state.presences.find(x=>x.NoFiche===s.NoFiche&&x.DateJour===d&&x.Session===session);const suffix=session;v['HeureDebut'+suffix]=p?.HeureArrivee||'';v['Fin'+suffix]=p?.HeureDepart||'';v['Retard'+suffix]=p?.Statut==='absent'?'ABS':!p?'':p.RetardMinutes?hfmt(p.RetardMinutes):'';v['Depart'+suffix]=p?.DepartHatifMinutes?hfmt(p.DepartHatifMinutes):'';v['Competence'+suffix]=p?.CodeCompetence||state.competences.find(c=>!prog(s.NoFiche,c.Code).done)?.Code||''}return v})}}
+function downloadCsv(cols,rows,name){const q=x=>'"'+String(x??'').replaceAll('"','""')+'"';const data='\ufeff'+[cols.map(q).join(';'),...rows.map(r=>cols.map(c=>q(r[c])).join(';'))].join('\r\n');download(new Blob([data],{type:'text/csv;charset=utf-8'}),name)}
+function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}
+function exportTosca(){const d=$('rDate').value,{cols,rows}=toscaRows(d);downloadCsv(cols,rows,'Tosca_'+d+'.csv');toast('CSV 14 colonnes téléchargé (démonstration)')}
+// V1.2 : rapport par groupe, contrôle de qualité et export de vérification.
+let reportLab='TOUS';
+function reportAudit(date,lab='TOUS'){
+ if(!isIsoDate(date)||!['TOUS','LAB1','LAB2'].includes(lab))return [];
+ return weekDates(date).flatMap(day=>state.eleves.filter(s=>s.Actif&&(lab==='TOUS'||s.Laboratoire===lab)).flatMap(s=>{
+  if(!labSchoolDay(day,s.Laboratoire).eligible)return [];
+  return ['AM','PM'].map(session=>{
+   const p=state.presences.find(x=>x.NoFiche===s.NoFiche&&x.DateJour===day&&x.Session===session);
+   let status='Non saisi';
+   if(p){status=p.Statut==='absent'?'Absence':!p.HeureArrivee||!p.HeureDepart?'Incomplet':'Complet';}
+   return {DateJour:day,Laboratoire:s.Laboratoire,NoFiche:s.NoFiche,NomComplet:s.Title,Session:session,Etat:status,Arrivee:p?.HeureArrivee||'',Depart:p?.HeureDepart||''};
+  });
+ }));
+}
+function reportAuditSummary(date,lab='TOUS'){
+ const rows=reportAudit(date,lab);
+ return {rows,complete:rows.filter(r=>r.Etat==='Complet').length,absent:rows.filter(r=>r.Etat==='Absence').length,incomplete:rows.filter(r=>r.Etat==='Incomplet').length,missing:rows.filter(r=>r.Etat==='Non saisi').length};
+}
+function exportReportAudit(){const d=$('rDate').value;if(!isIsoDate(d)){toast('Date invalide');return}const rows=reportAudit(d,reportLab);downloadCsv(['DateJour','Laboratoire','NoFiche','NomComplet','Session','Etat','Arrivee','Depart'],rows,'Controle_hebdomadaire_'+d+'_'+reportLab+'.csv');toast('Contrôle hebdomadaire exporté (démonstration)')}
+function setReportLab(lab){if(!['TOUS','LAB1','LAB2'].includes(lab))return;reportLab=lab;render()}
+function rapports(){const days=weekDates(filterDate||'2026-11-10'),audit=reportAuditSummary(filterDate||'2026-11-10',reportLab);
+ const students=state.eleves.filter(s=>s.Actif&&(reportLab==='TOUS'||s.Laboratoire===reportLab));
+ const r=students.map(s=>{const dates=days.map(d=>{const parts=['AM','PM'].map(a=>{if(!labSchoolDay(d,s.Laboratoire).eligible)return 'Sans cours';const p=state.presences.find(x=>x.NoFiche===s.NoFiche&&x.DateJour===d&&x.Session===a);return !p?'Non saisi':p.Statut==='absent'?'Absent':!p.HeureArrivee||!p.HeureDepart?'Incomplet':p.CodeCompetence});return `<td><div>AM : ${esc(parts[0])}</div><div class="muted">PM : ${esc(parts[1])}</div></td>`}).join('');return `<tr><td><strong>${esc(s.Title)}</strong><div class="muted">${s.NoFiche} · ${s.Laboratoire}</div></td>${dates}</tr>`});
+ return `${panel('Période et exportations',`<div class="formgrid two">${field('Date du rapport','rDate',input('rDate','date',filterDate||'2026-11-10','onchange="filterDate=this.value;render()"'))}${field('Groupe','rLab',select('rLab',opts([['TOUS','Tous les groupes'],['LAB1','LAB1'],['LAB2','LAB2']],reportLab),'onchange="setReportLab(this.value)"'))}</div><div class="actions"><button class="btn primary" onclick="exportReportAudit()">Exporter le contrôle CSV</button><button class="btn" onclick="exportTosca()">Tosca CSV (tous les groupes)</button><button class="btn" onclick="window.print()">Imprimer / PDF</button></div>`, 'Les exports sont des simulations locales, pas des rapports officiels.')}${panel('Contrôle des séances admissibles',`<div class="cards"><div class="card"><small>Complètes</small><div class="num">${audit.complete}</div></div><div class="card"><small>Absences déclarées</small><div class="num">${audit.absent}</div></div><div class="card"><small>Incomplètes</small><div class="num">${audit.incomplete}</div></div><div class="card"><small>Non saisies</small><div class="num">${audit.missing}</div></div></div><p class="footnote">Seules les séances prévues au calendrier sont comptées. « Non saisie » ne signifie jamais « absence ».</p>`)}${panel('Rapport hebdomadaire',tbody(r,['Élève',...days.map(dateFR)]),`Lundi au jeudi · semaine du ${dateFR(days[0])} · ${reportLab}`)}<div class="hint">Contrôlez les pointages manquants avant tout export. Le format Tosca de démonstration doit être validé par l’établissement avant usage réel.</div>`;
+}
+// V0.8 : import de fermetures scolaires globales, atomique et limité à la démonstration.
+// Format explicite DateJour;Motif, une ligne par date. Aucun renseignement d'élève.
+function parseCalendarCsv(raw,existing=[]){
+ const rows=[],errors=[],seen=new Set(existing.map(h=>h.DateJour));
+ const lines=String(raw||'').replace(/^\uFEFF/,'').split(/\r?\n/);
+ for(let i=0;i<lines.length;i++){
+  const line=lines[i].trim();if(!line)continue;
+  const parts=line.split(';');
+  if(i===0&&line.toLowerCase().replace(/\s/g,'')==='datejour;motif')continue;
+  if(parts.length!==2){errors.push(`Ligne ${i+1} : deux colonnes attendues`);continue}
+  const date=parts[0].trim(),reason=parts[1].trim();
+  if(!isIsoDate(date)){errors.push(`Ligne ${i+1} : date invalide`);continue}
+  if(!reason||reason.length>120){errors.push(`Ligne ${i+1} : motif requis (120 caractères maximum)`);continue}
+  if(seen.has(date)){errors.push(`Ligne ${i+1} : date en double ou déjà inscrite`);continue}
+  seen.add(date);rows.push({DateJour:date,Title:reason});
+ }
+ if(!rows.length&&!errors.length)errors.push('Aucune journée à importer');
+ return {rows,errors};
+}
+function previewCalendarImport(){
+ const result=parseCalendarCsv($('calendarCsv').value,state.joursFeries);
+ const e=$('calendarPreview');
+ e.innerHTML=`<strong>${result.rows.length} journée(s) admissible(s), ${result.errors.length} erreur(s).</strong>`+
+  (result.errors.length?`<ul>${result.errors.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'')+
+  (result.rows.length?`<div class="mini-list">${result.rows.map(x=>`<div class="mini-row">${esc(x.DateJour)} · ${esc(x.Title)}</div>`).join('')}</div>`:'');
+ $('calendarCommit').disabled=!!result.errors.length||!result.rows.length;
+}
+function importCalendarCsv(evt){
+ evt.preventDefault();const result=parseCalendarCsv($('calendarCsv').value,state.joursFeries);
+ if(result.errors.length||!result.rows.length){previewCalendarImport();toast('Import refusé : corriger toutes les lignes.');return false}
+ state.joursFeries.push(...result.rows);save();toast(`${result.rows.length} journée(s) sans cours importée(s) localement.`);return false;
+}
+function calendrier(){const hol=[...state.joursFeries].sort((a,b)=>a.DateJour.localeCompare(b.DateJour));const school=weekDates(filterDate||'2026-11-10');return `<div class="cols"><section class="panel"><h2>Journées sans cours</h2><form class="form" onsubmit="return addHoliday(event)">${field('Date','hDate',input('hDate','date','2026-12-25','required'))}${field('Motif','hReason',input('hReason','text','Congé','required'))}<button class="btn primary">Ajouter une journée</button></form><div class="mini-list" style="margin-top:16px">${hol.map(h=>`<div class="mini-row"><span>${dateFR(h.DateJour)} · ${esc(h.Title)}</span><button class="btn mini danger" onclick="delHoliday('${h.DateJour}')">Retirer</button></div>`).join('')||'<p class="muted">Aucune journée sans cours de démonstration.</p>'}</div></section><section class="panel"><h2>Projection de fin</h2><p>Les dates futures dépendent des calendriers officiels de l’école, des congés, du rythme du groupe et des journées en banque.</p><div class="hint">Aucune date de fin inventée : il faut importer les calendriers officiels des années suivantes avant de calculer la projection.</div></section></div>${panel('Semaine consultée',`<div class="pillrow">${school.map(d=>`<span class="pill ${hol.some(h=>h.DateJour===d)?'bad':'ok'}">${dateFR(d)}</span>`).join('')}</div>`)}${groupCalendarPanel(selected)}${panel('Importer un calendrier scolaire (CSV de démonstration)',`<p class="hint">Une fermeture commune aux deux groupes par ligne. Format : <code>DateJour;Motif</code>, puis <code>2026-12-25;Congé</code>. Les lignes invalides ou en double bloquent tout l’import. Aucune connexion à SharePoint.</p><form class="form" onsubmit="return importCalendarCsv(event)"><label for="calendarCsv">Coller le calendrier scolaire</label><textarea id="calendarCsv" rows="5" oninput="previewCalendarImport()" placeholder="DateJour;Motif\n2026-12-25;Congé"></textarea><div id="calendarPreview" aria-live="polite"></div><button id="calendarCommit" class="btn primary" type="submit" disabled>Importer les journées validées</button></form>`)} `}
+function addHoliday(evt){evt.preventDefault();const d=$('hDate').value;if(!isIsoDate(d)){toast('Date invalide');return false}if(state.joursFeries.some(h=>h.DateJour===d)){toast('Cette date existe déjà');return false}const reason=$('hReason').value.trim();if(!reason){toast('Motif requis');return false}state.joursFeries.push({DateJour:d,Title:reason});save();toast('Congé de démonstration ajouté');return false}
+function delHoliday(d){state.joursFeries=state.joursFeries.filter(h=>h.DateJour!==d);save()}
+const SETTING_CATEGORIES=['Présence','Horaires','Calendrier','Élèves','Compétences','Rapports','Affichage','Poste élève','Sauvegarde','Corriger les présences antérieures','Historique','Mon cheminement','État du système'];
+function reglages(){return `<section class="settings-page"><div class="settings-intro"><strong>Du plus utilisé au plus occasionnel</strong><p>Choisis une catégorie pour afficher seulement les réglages dont tu as besoin.</p></div><div class="settings-grid" role="group" aria-label="Catégories de réglages">${SETTING_CATEGORIES.map(c=>`<button type="button" class="settings-tile ${settingGroup===c?'active':''}" aria-pressed="${settingGroup===c}" onclick="settingGroup='${c}';render()">${c}</button>`).join('')}</div><div class="settings-detail"><h2>${settingGroup}</h2><p class="settings-description">${settingDescription(settingGroup)}</p>${settingsContent()}</div></section>`}
+function settingDescription(c){return ({'Présence':'Codes et paramètres utilisés pour la prise de présence.','Horaires':'Heures des séances et paramètres de retard.','Calendrier':'Dates et jours de classe.','Élèves':'Paramètres des dossiers élèves.','Compétences':'Paramètres du programme de photographie.','Rapports':'Préparation des rapports hebdomadaires.','Affichage':'Présentation de l’application.','Poste élève':'Réserve cet appareil au seul scan des élèves.','Sauvegarde':'Copies de sécurité et restauration des données.','Corriger les présences antérieures':'Choisissez un ou plusieurs élèves et une date, puis corrigez la compétence ou le code du matin (AM) et de l’après-midi (PM).','Historique':'Consulte les corrections déjà enregistrées. Pour rectifier une erreur, fais une nouvelle correction.','Mon cheminement':'Accès personnel des élèves à leur dossier en lecture seule.','État du système':'État actuel des composants du prototype local.'})[c]||''}
+function settingsContent(){const c=settingGroup;if(c==='Historique')return `<div class="settings-sheet"><input class="settings-search" placeholder="Rechercher une date, un élève ou une correction" aria-label="Rechercher dans l’historique" oninput="filterSettingsHistory(this.value)"><div id="settings-history">${settingsHistoryRows('')}</div></div>`;
+if(c==='État du système')return `<div class="settings-sheet"><button class="btn primary" onclick="render()">Actualiser</button><div class="system-rows">${[['Serveur Bun','Non utilisé'],['Base SQLite','Non utilisée'],['Stockage de démonstration','Navigateur local'],['Connexion SharePoint','Non connectée'],['Version du prototype','2.8 — référence visuelle'],['Poste de scan 1','Non connecté'],['Poste de scan 2','Non connecté']].map(([k,v])=>`<div><span>${k}</span><span>${v}</span></div>`).join('')}</div><p class="muted">Ces informations concernent uniquement la démonstration locale. Elles ne représentent pas l’état du serveur original.</p></div>`;
+if(c==='Corriger les présences antérieures')return `<div class="settings-sheet"><div class="form">${field('Date','corDate',input('corDate','date',filterDate))}<div class="settings-correction">${field('Élève fictif','corStudent',select('corStudent',state.eleves.map(e=>`<option value="${esc(e.NoFiche)}">${esc(e.NomComplet||e.Nom||e.NoFiche)} — ${esc(e.NoFiche)}</option>`).join('')))}${field('Matin (AM)','corAM',select('corAM',settingsCorrectionOptions()))}${field('Après-midi (PM)','corPM',select('corPM',settingsCorrectionOptions()))}</div><p class="muted">Laisser une séance inchangée si elle ne doit pas être corrigée. Les corrections de la démonstration sont consignées localement.</p><div class="actions"><button type="button" class="btn primary" onclick="saveSettingsCorrection()">Enregistrer</button><button type="button" class="btn" onclick="render()">Annuler</button></div></div></div>`;
+if(c==='Sauvegarde')return `<div class="settings-sheet"><h3>Sauvegarde de démonstration</h3><p>Exporter une copie JSON des deux dossiers fictifs et des données locales.</p><button class="btn primary" onclick="exportSettingsBackup()">Sauvegarder maintenant</button><p class="muted">La sauvegarde automatique sur serveur et la restauration de base SQLite appartiennent à l’ancienne application et ne sont pas actives ici.</p></div>`;
+if(c==='Mon cheminement'||c==='Poste élève')return `<div class="settings-sheet"><h3>${c==='Mon cheminement'?'Accès personnel des élèves':'Mode poste élève (scan seulement)'}</h3><p>Cette interface reproduit la présentation du logiciel original. L’authentification, les codes d’activation et le verrouillage d’un poste exigent une configuration Microsoft 365 autorisée.</p><button class="btn" onclick="navigate('${c==='Mon cheminement'?'portail':'pointage'}')">${c==='Mon cheminement'?'Voir l’aperçu du cheminement':'Voir la prise de présence'}</button></div>`;
+const alias={'Présence':'Présences','Horaires':'Horaires','Calendrier':'Calendrier','Élèves':'Élèves','Compétences':'Compétences','Rapports':'Rapports','Affichage':'Affichage'};const key=alias[c];if(key){const rows=state.parametres.filter(s=>s.Categorie===key);return `<div class="settings-sheet">${rows.length?settingsFormFor(key):`<p class="muted">Aucun réglage modifiable n’est encore défini pour cette catégorie dans le prototype.</p>`}</div>`}return `<div class="settings-sheet"><p>Cette fonction sera reliée aux composants Microsoft 365 après autorisation. Aucune connexion réelle n’est active.</p></div>`}
+function settingsFormFor(key){const rows=state.parametres.filter(s=>s.Categorie===key);return `<form class="form" onsubmit="return saveSettings(event)"><div class="formgrid two">${rows.map((r,i)=>field(r.Title,'cfg'+i,input('cfg'+i,r.Cle.endsWith('Minutes')||r.Cle==='alertAbsences'?'number':'text',r.Valeur,'required'))).join('')}</div><button class="btn primary">Enregistrer les paramètres</button></form>`}
+function settingsHistoryRows(q){const rows=(state.corrections||[]).filter(r=>JSON.stringify(r).toLowerCase().includes(q.toLowerCase()));return rows.length?rows.slice().reverse().map(r=>`<div class="settings-history-row">${esc(r.DateJour||r.Date||'Date inconnue')} · ${esc(r.NoFiche||'')} · ${esc(r.Seance||'')} : ${esc(r.AncienneValeur||'—')} → ${esc(r.NouvelleValeur||'—')}</div>`).join(''):'Aucune correction enregistrée.'}
+function filterSettingsHistory(q){$('settings-history').innerHTML=settingsHistoryRows(q)}
+function settingsCorrectionOptions(){return `<option value="">Ne pas modifier</option><option value="absent">Absent</option><option value="present">Présent</option>${state.competences.map(c=>`<option value="${esc(c.Code)}">${esc(c.Code)} — ${esc(c.Title)}</option>`).join('')}`}
+function saveSettingsCorrection(){const d=$('corDate').value,id=$('corStudent').value,am=$('corAM').value,pm=$('corPM').value;if(!/^\d{4}-\d{2}-\d{2}$/.test(d)||(!am&&!pm)){toast('Choisis une date et au moins une séance à corriger');return}state.corrections=state.corrections||[];for(const [seance,v] of [['AM',am],['PM',pm]]){if(!v)continue;const row=state.presences.find(r=>r.NoFiche===id&&r.DateJour===d&&r.Seance===seance);const before=row?row.CodeCompetence||row.Statut||'':'Non saisi';state.corrections.push({DateJour:d,NoFiche:id,Seance:seance,AncienneValeur:before,NouvelleValeur:v,Source:'Démo locale'});if(row){if(v==='absent'||v==='present')row.Statut=v;else{row.CodeCompetence=v;row.Statut='present'}}else state.presences.push({NoFiche:id,DateJour:d,Seance:seance,Statut:v==='absent'?'absent':'present',CodeCompetence:v==='absent'||v==='present'?'':v,RetardMinutes:0})}save();toast('Correction locale enregistrée');settingGroup='Historique';render()}
+function exportSettingsBackup(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');const u=URL.createObjectURL(blob);a.href=u;a.download='SuiviPhotoDEP_demo_sauvegarde.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+function settingsForm(){const rows=state.parametres.filter(s=>s.Categorie===settingGroup);if(!rows.length)return `<div class="inset">Cette catégorie fait partie de l'architecture cible Power Apps. Les permissions et les règles avancées seront configurées pendant la mise en place. Aucune option factice n'est proposée ici.</div>`;return `<form class="form" onsubmit="return saveSettings(event)"><div class="formgrid two">${rows.map((r,i)=>field(r.Title,'cfg'+i,input('cfg'+i,r.Cle.endsWith('Minutes')||r.Cle==='alertAbsences'?'number':'text',r.Valeur,'required'))).join('')}</div><button class="btn primary">Enregistrer les paramètres</button></form>`}
+function saveSettings(evt){evt.preventDefault();const rows=state.parametres.filter(s=>s.Categorie===({'Présence':'Présences'}[settingGroup]||settingGroup));rows.forEach((r,i)=>r.Valeur=$('cfg'+i).value);save();toast('Réglages mis à jour');return false}
+function importer(){return `${panel('Importer des élèves fictifs',`<div class="hint">Cette saisie ne charge rien sur SharePoint. Format : NoFiche;NomComplet;Laboratoire. Les numéros sont conservés comme du texte afin de garder les zéros.</div><form class="form" onsubmit="return importStudents(event)">${field('Coller des lignes CSV','rawCsv','<textarea id="rawCsv" rows="6" placeholder="0000789;Charlie Fictif;LAB1"></textarea>')}<div class="actions"><button class="btn primary">Valider et importer</button></div></form>`, 'Doublons refusés, groupes LAB1/LAB2 uniquement, fiche à 7 chiffres')}${panel('Sécurité et confidentialité','<p>Importation locale, élèves inventés uniquement. Ne collez aucune donnée personnelle réelle dans cette démonstration.</p>')}`}
+function importStudents(evt){evt.preventDefault();toast('Importation désactivée dans cette démonstration à deux dossiers fictifs.');return false;}
+function portail(){const s=stu(selected)||state.eleves[0];const t=totals(s.NoFiche);return `<div class="hint">Aperçu fonctionnel seulement. Ce n'est PAS un portail sécurisé : aucun compte d'élève, aucune authentification ni contrôle d'accès n'est simulé. Les vrais dossiers ne doivent pas être intégrés ici.</div><div class="panel">${field('Élève fictif à visualiser','poStudent',select('poStudent',stopts(s.NoFiche),'onchange="selected=this.value;render()"'))}<div class="hero" style="margin-top:18px"><h2>Mon cheminement · ${esc(s.Title)}</h2><p>${s.Laboratoire} · ${t.h.toFixed(1)} heures de pointage · ${t.passed} compétences réussies</p></div><div class="cards"><div class="card"><small>Compétences SU</small><div class="num">${t.passed}</div></div><div class="card"><small>Journées en banque</small><div class="num">${t.bank}</div></div><div class="card"><small>Absences</small><div class="num">${t.abs}</div></div><div class="card"><small>Retards</small><div class="num">${t.late}</div></div></div></div>`}
+function modal(html){$('modalwrap').hidden=false;$('modalwrap').innerHTML=`<div class="modalbg" onclick="if(event.target===this)closeModal()"><div class="modal" role="dialog" aria-modal="true">${html}</div></div>`}function closeModal(){$('modalwrap').hidden=true;$('modalwrap').innerHTML=''}
+function resetDemo(){if(!confirm('Réinitialiser toutes les modifications locales et retrouver Camille et Alex?'))return;state=structuredClone(START_DATA);state.competencesOuvertes=[];try{localStorage.removeItem(KEY)}catch(_){}search='';selected='0000123';view='accueil';render();toast('Démonstration réinitialisée')}
+function init(){render();const e=$('screen');if(view==='examens')updateExamNum()}
+
+/* V0.9 : calendrier par laboratoire et simulation prudente, aucune synchronisation distante. */
+const LAB_DAYS_DEFAULT={LAB1:[1,2,3,4],LAB2:[1,2,3,4]};
+function labCalendarInit(){
+ if(!state.labCalendar||typeof state.labCalendar!=='object')state.labCalendar={};
+ for(const lab of ['LAB1','LAB2']){
+  const z=state.labCalendar[lab];
+  if(!z||!Array.isArray(z.days)||!Array.isArray(z.closures))state.labCalendar[lab]={days:[...LAB_DAYS_DEFAULT[lab]],closures:[]};
+ }
+}
+labCalendarInit();
+function validLabDays(days){return Array.isArray(days)&&days.length>=1&&days.length<=5&&new Set(days).size===days.length&&days.every(d=>Number.isInteger(d)&&d>=1&&d<=5)}
+function labSchoolDay(date,lab){
+ if(!isIsoDate(date)||!['LAB1','LAB2'].includes(lab))return {eligible:false,reason:'Date ou groupe invalide'};
+ const day=new Date(date+'T12:00:00').getDay();
+ if(!state.labCalendar[lab].days.includes(day))return {eligible:false,reason:'Hors horaire du groupe'};
+ if(state.joursFeries.some(x=>x.DateJour===date))return {eligible:false,reason:'Fermeture commune'};
+ const closed=state.labCalendar[lab].closures.find(x=>x.DateJour===date);
+ if(closed)return {eligible:false,reason:closed.Motif};
+ return {eligible:true,reason:'Cours prévu (simulation)'};
+}
+function labDaysSave(evt,lab){evt.preventDefault();const days=[1,2,3,4,5].filter(n=>document.getElementById('day'+lab+n)?.checked);
+ if(!validLabDays(days)){toast('Choisir entre 1 et 5 jours distincts.');return false}
+ state.labCalendar[lab].days=days;save();toast('Horaire de '+lab+' mis à jour');return false}
+function parseLabClosures(raw,lab){
+ const errors=[],items=[],seen=new Set();const lines=raw.replace(/^\uFEFF/,'').split(/\r?\n/).filter(x=>x.trim());
+ if(lines.length&&/^DateJour\s*;\s*Motif\s*;\s*Laboratoire\s*$/i.test(lines[0].trim()))lines.shift();
+ for(let i=0;i<lines.length;i++){
+  const parts=lines[i].split(';').map(x=>x.trim());const [date,motif,groupe]=parts;
+  if(parts.length!==3||!isIsoDate(date)||!motif||!['LAB1','LAB2'].includes(groupe))errors.push('Ligne '+(i+1)+' : format invalide');
+  else if(groupe!==lab)errors.push('Ligne '+(i+1)+' : groupe différent de '+lab);
+  else if(seen.has(date)||state.labCalendar[lab].closures.some(x=>x.DateJour===date))errors.push('Ligne '+(i+1)+' : date en double');
+  else if(state.joursFeries.some(x=>x.DateJour===date))errors.push('Ligne '+(i+1)+' : fermeture commune déjà enregistrée');
+  else {seen.add(date);items.push({DateJour:date,Motif:motif})}
+ }
+ return {items,errors};
+}
+function labPreview(){const lab=$('labCalGroup').value;const v=parseLabClosures($('labCsv').value,lab);$('labCalPreview').textContent=v.errors.length?v.errors.join(' | '):`${v.items.length} fermeture(s) valides à importer`;$('labCalCommit').disabled=!!v.errors.length||!v.items.length}
+function labImport(evt){evt.preventDefault();const lab=$('labCalGroup').value;const r=parseLabClosures($('labCsv').value,lab);if(r.errors.length||!r.items.length){toast('Importation refusée : vérifier les lignes');return false}state.labCalendar[lab].closures.push(...r.items);save();toast(r.items.length+' fermeture(s) importée(s) pour '+lab);return false}
+function labDelete(lab,date){if(!['LAB1','LAB2'].includes(lab))return;state.labCalendar[lab].closures=state.labCalendar[lab].closures.filter(x=>x.DateJour!==date);save()}
+function labCalendarWeek(date,lab){const d=new Date(date+'T12:00:00');d.setDate(d.getDate()-((d.getDay()+6)%7));return Array.from({length:7},(_,i)=>{const x=new Date(d);x.setDate(d.getDate()+i);const iso=x.toISOString().slice(0,10);return {date:iso,...labSchoolDay(iso,lab)}})}
+function labCoverage(from,to,lab){if(!isIsoDate(from)||!isIsoDate(to)||from>to)return null;const a=new Date(from+'T12:00:00'),b=new Date(to+'T12:00:00');if((b-a)/86400000>366)return null;let eligible=0,excluded=0;for(let x=new Date(a);x<=b;x.setDate(x.getDate()+1)){const r=labSchoolDay(x.toISOString().slice(0,10),lab);if(r.eligible)eligible++;else excluded++}return {eligible,excluded}}
+function labExport(){const rows=['DateJour;Motif;Laboratoire'];for(const lab of ['LAB1','LAB2'])for(const x of state.labCalendar[lab].closures)rows.push([x.DateJour,'"'+x.Motif.replaceAll('"','""')+'"',lab].join(';'));download(new Blob(['\ufeff'+rows.join('\r\n')],{type:'text/csv;charset=utf-8'}),'Fermetures_LAB_Demo.csv')}
+function bankSimulation(id){const s=stu(id);if(!s)return null;const bank=Number(s.JoursBanque);return Number.isFinite(bank)&&bank>=0?bank:null}
+function labProjection(id,from='2026-11-16',horizon=180){const s=stu(id);if(!s||!isIsoDate(from))return {date:null,reason:'Données invalides'};
+ const p=projectionCours(id);if(!p.rows.length)return {date:null,reason:'Aucune compétence ouverte'};
+ if(p.rows.some(r=>r.days===null))return {date:null,reason:'Horaires incomplets'};
+ const days=p.rows.reduce((a,r)=>a+r.days,0);let count=0;
+ for(let i=0;i<horizon;i++){const d=new Date(from+'T12:00:00');d.setDate(d.getDate()+i);const date=d.toISOString().slice(0,10);if(labSchoolDay(date,s.Laboratoire).eligible&&++count>=days)return {date,days,reason:'Estimation locale non validée'}}
+ return {date:null,days,reason:'Horizon insuffisant ou calendrier incomplet'};
+}
+function labSchedulePanel(){return ['LAB1','LAB2'].map(lab=>panel('Horaire '+lab,`<form onsubmit="return labDaysSave(event,'${lab}')"><div class="pillrow">${[1,2,3,4,5].map((n)=>`<label class="pill"><input type="checkbox" id="day${lab}${n}" ${state.labCalendar[lab].days.includes(n)?'checked':''}> ${['','Lun','Mar','Mer','Jeu','Ven'][n]}</label>`).join('')}</div><div class="actions"><button class="btn primary">Enregistrer l’horaire</button></div></form><div class="mini-list">${state.labCalendar[lab].closures.map(x=>`<div class="mini-row"><span>${esc(x.DateJour)} · ${esc(x.Motif)}</span><button class="btn mini danger" onclick="labDelete('${lab}','${x.DateJour}')">Retirer</button></div>`).join('')||'<p class="muted">Aucune fermeture propre au groupe.</p>'}</div>`)).join('')}
+const previousCalendar=calendrier;
+calendrier=function(){return previousCalendar()+labSchedulePanel()+panel('Importer des fermetures propres à un groupe',`<p class="hint">CSV : DateJour;Motif;Laboratoire. Importation atomique, uniquement LAB1 ou LAB2.</p><form class="form" onsubmit="return labImport(event)">${field('Groupe','labCalGroup',select('labCalGroup',opts([['LAB1','LAB1'],['LAB2','LAB2']],'LAB1'),'onchange="labPreview()"'))}${field('CSV','labCsv','<textarea id="labCsv" rows="5" oninput="labPreview()" placeholder="DateJour;Motif;Laboratoire\n2026-12-10;Formation;LAB1"></textarea>')}<div id="labCalPreview" aria-live="polite"></div><button id="labCalCommit" class="btn primary" disabled>Importer</button></form><div class="actions"><button class="btn" onclick="labExport()">Exporter les fermetures LAB (CSV)</button></div>`)+panel('Couverture de calendrier et simulation',`<div class="formgrid two">${field('Du','coverFrom',input('coverFrom','date','2026-11-16'))}${field('Au','coverTo',input('coverTo','date','2026-12-18'))}</div><button class="btn" onclick="labCoverageShow()">Calculer les journées admissibles</button><div id="coverageResult" class="hint">Les journées restent provisoires jusqu’à validation du calendrier officiel.</div>`)};
+function labCoverageShow(){const from=$('coverFrom').value,to=$('coverTo').value;const lab=stu(selected)?.Laboratoire||'LAB1';const c=labCoverage(from,to,lab);$('coverageResult').textContent=c?`${lab} : ${c.eligible} journées admissibles et ${c.excluded} journées exclues (simulation).`:'Période invalide ou supérieure à 366 jours.'}
+const previousProjectionPanel=projectionPanel;
+projectionPanel=function(id){const base=previousProjectionPanel(id);const r=labProjection(id);const bank=bankSimulation(id);return base+panel('Simulation du calendrier — non officielle',`<p>${r.date?`Fin théorique possible : <strong>${dateFR(r.date)}</strong>`:esc(r.reason)}. ${r.days??'—'} journée(s) de cours estimée(s).</p><p>Banque affichée séparément : ${bank??'inconnue'} journée(s), non déduite(s) automatiquement.</p><div class="hint">La simulation ne tient pas compte des futures fermetures non importées, des stages ou des règles officielles d’examen. Ne pas utiliser pour fixer une date réelle.</div>`)};
+// La démonstration est limitée strictement aux deux dossiers fictifs autorisés.
+importStudents=function(evt){evt.preventDefault();toast('Importation d’élèves désactivée dans cette démo : seuls Camille et Alex sont autorisés.');return false};
+
+document.addEventListener('DOMContentLoaded',init);
+
+// V1.3 : dix améliorations de qualité du suivi, sans connexion réseau.
+const V13_STEPS=['Seuils modifiables','Alertes par élève','Retards répétés','Contrôle hebdomadaire','Anomalies de pointage','Doublons','Hors calendrier','Prévalidation Tosca','Export anomalies','Accès fiche élève'];
+function qualityThresholds(){
+ const a=Number(state.parametres.find(p=>p.Cle==='alertAbsences')?.Valeur);
+ const l=Number(state.parametres.find(p=>p.Cle==='alertRetards')?.Valeur);
+ return {absence:Number.isInteger(a)&&a>=1&&a<=100?a:4,late:Number.isInteger(l)&&l>=1&&l<=100?l:3};
+}
+function qualityAlerts(){const t=qualityThresholds();return alertSummary().byStudent.map(s=>({...s,absenceAlert:s.abs>=t.absence,lateAlert:s.late>=t.late}));}
+function qualityIssues(date,lab='TOUS'){
+ const rows=reportAudit(date,lab),issues=[];
+ const eligible=new Set(rows.map(r=>`${r.NoFiche}|${r.DateJour}|${r.Session}`));
+ const seen=new Set();
+ for(const p of state.presences){
+  if(!p.DateJour||!weekDates(date).includes(p.DateJour)||lab!=='TOUS'&&p.Laboratoire!==lab)continue;
+  const key=`${p.NoFiche}|${p.DateJour}|${p.Session}`;
+  const add=(type)=>issues.push({DateJour:p.DateJour,Laboratoire:p.Laboratoire,NoFiche:p.NoFiche,Session:p.Session,Type:type});
+  if(seen.has(key))add('Doublon de séance');seen.add(key);
+  if(!stu(p.NoFiche))add('Élève inconnu');
+  else if(stu(p.NoFiche).Laboratoire!==p.Laboratoire)add('Groupe incohérent');
+  if(!eligible.has(key))add('Hors calendrier ou hors groupe');
+  if(p.Statut==='absent'&&(p.HeureArrivee||p.HeureDepart))add('Absence avec heures');
+  if(p.HeureArrivee&&p.HeureDepart&&minutes(p.HeureDepart)<minutes(p.HeureArrivee))add('Départ avant arrivée');
+  if(p.Statut!=='absent'&&(!p.HeureArrivee||!p.HeureDepart))add('Pointage incomplet');
+ }
+ for(const r of rows)if(r.Etat==='Non saisi')issues.push({DateJour:r.DateJour,Laboratoire:r.Laboratoire,NoFiche:r.NoFiche,Session:r.Session,Type:'Non saisi'});
+ return issues.sort((a,b)=>a.DateJour.localeCompare(b.DateJour)||a.NoFiche.localeCompare(b.NoFiche));
+}
+function qualityTosca(date,lab='TOUS'){
+ const issues=qualityIssues(date,lab),blocking=issues.filter(i=>i.Type!=='Non saisi');
+ return {issues,blocking,ready:blocking.length===0&&issues.length===0};
+}
+function exportQuality(){const d=filterDate||'2026-11-10';if(!isIsoDate(d)){toast('Date invalide');return false}downloadCsv(['DateJour','Laboratoire','NoFiche','Session','Type'],qualityIssues(d,reportLab),'Anomalies_'+d+'_'+reportLab+'.csv');toast('Anomalies exportées — données fictives');return true;}
+function qualityPanel(){
+ const d=filterDate||'2026-11-10',q=qualityTosca(d,reportLab),t=qualityThresholds(),alerts=qualityAlerts();
+ const rows=q.issues.map(i=>`<tr><td>${esc(i.DateJour)}</td><td>${esc(i.Laboratoire)}</td><td><button class="linkbutton" onclick="openFiche('${esc(i.NoFiche)}')">${esc(i.NoFiche)}</button></td><td>${esc(i.Session)}</td><td>${esc(i.Type)}</td></tr>`);
+ const ar=alerts.map(a=>`<tr><td><button class="linkbutton" onclick="openFiche('${esc(a.id)}')">${esc(a.name)}</button></td><td>${a.abs}${a.absenceAlert?' — Seuil atteint':''}</td><td>${a.late}${a.lateAlert?' — Seuil atteint':''}</td></tr>`);
+ return panel('Qualité des données et alertes — V1.3',`<div class="hint">Prévalidation indicative : aucun export Tosca n'est envoyé à SharePoint. Une séance non saisie doit être vérifiée, pas convertie en absence.</div><div class="formgrid two">${field('Seuil d’alerte absences (demi-journées)','qAbs',input('qAbs','number',t.absence,'min="1" max="100"'))}${field('Seuil d’alerte retards (séances)','qLate',input('qLate','number',t.late,'min="1" max="100"'))}</div><div class="actions"><button class="btn" onclick="saveQualityThresholds()">Enregistrer les seuils</button><button class="btn" onclick="exportQuality()">Exporter les anomalies CSV</button></div><div class="cards"><div class="card"><small>Alertes d'absences</small><div class="num">${alerts.filter(a=>a.absenceAlert).length}</div></div><div class="card"><small>Alertes de retards</small><div class="num">${alerts.filter(a=>a.lateAlert).length}</div></div><div class="card"><small>Anomalies à vérifier</small><div class="num">${q.issues.length}</div></div><div class="card"><small>Contrôle Tosca</small><div class="num">${q.ready?'OK':'À vérifier'}</div></div></div><h3>Alertes par élève</h3>${tbody(ar,['Élève','Absences','Retards'])}<h3>Contrôle de la semaine du ${esc(d)}</h3>${tbody(rows,['Date','Groupe','Élève','Séance','Anomalie'])}<p class="footnote">Les seuils sont conservés dans les paramètres locaux de la démo. Le contrôle ne certifie pas le format Tosca officiel.</p>`);
+}
+function saveQualityThresholds(){
+ const a=Number($('qAbs').value),l=Number($('qLate').value);
+ if(!Number.isInteger(a)||a<1||a>100||!Number.isInteger(l)||l<1||l>100){toast('Seuils entiers de 1 à 100 requis');return false}
+ for(const [key,value,label] of [['alertAbsences',a,'Seuil demi-journées absence'],['alertRetards',l,'Seuil séances retard']]){
+  let p=state.parametres.find(p=>p.Cle===key);
+  if(!p){p={Title:label,Cle:key,Valeur:String(value),Categorie:'Alertes'};state.parametres.push(p)}else p.Valeur=String(value);
+ }
+ save();toast('Seuils mis à jour');return true;
+}
+const rapportsV12=rapports;
+rapports=function(){return rapportsV12()+qualityPanel()};
+
+// V1.4 : correction guidée et registre local des journées en banque.
+const V14_STEPS=['Accès aux anomalies','Filtre élève','Correction séance','Détection sans enregistrement','Solde de banque','Journal des ajustements','Motif obligatoire','Montant borné','Historique non destructif','Export de la banque'];
+if(!Array.isArray(state.ajustementsBanque))state.ajustementsBanque=[];
+let qualityStudent='TOUS';
+function bankLedger(id){return state.ajustementsBanque.filter(a=>a.NoFiche===id).sort((a,b)=>a.Cle.localeCompare(b.Cle));}
+function bankBalance(id){const s=stu(id);if(!s)return null;const base=Number(s.JoursBanque||0);const delta=bankLedger(id).reduce((n,a)=>n+Number(a.Jours),0);return Number.isFinite(base+delta)?Math.round((base+delta)*100)/100:null;}
+function validateBankChange(id,days,reason){if(!stu(id))return 'Élève inconnu';if(!Number.isFinite(days)||days===0||Math.abs(days)>30||Math.round(days*2)!==days*2)return 'Utiliser des demi-journées, entre -30 et +30 (sauf zéro)';if(!reason||reason.trim().length<5||reason.trim().length>120)return 'Motif requis : 5 à 120 caractères';if(bankBalance(id)+days<0)return 'Solde négatif interdit';return '';}
+function applyBankChange(id,days,reason,date){const error=validateBankChange(id,days,reason);if(error)return {ok:false,error};if(!isIsoDate(date))return {ok:false,error:'Date invalide'};
+ const seq=state.ajustementsBanque.length+1,cle=`BANQUE-${String(seq).padStart(5,'0')}`;
+ if(state.ajustementsBanque.some(a=>a.Cle===cle))return {ok:false,error:'Identifiant déjà utilisé'};
+ const entry={Title:'Ajustement banque',Cle:cle,NoFiche:id,Jours:days,Motif:reason.trim(),DateModification:date};state.ajustementsBanque.push(entry);return {ok:true,entry};}
+function submitBankChange(evt){evt.preventDefault();const id=$('bankStudent').value,days=Number($('bankDays').value),reason=$('bankReason').value,date=$('bankDate').value;const result=applyBankChange(id,days,reason,date);if(!result.ok){toast(result.error);return false}save();toast('Ajustement ajouté au registre fictif');return false;}
+function bankPanel(){const id=stu(selected)?selected:state.eleves[0].NoFiche,entries=bankLedger(id);const rows=entries.map(a=>`<tr><td>${esc(a.DateModification)}</td><td>${esc(a.Jours)}</td><td>${esc(a.Motif)}</td><td>${esc(a.Cle)}</td></tr>`);
+ return panel('Banque de journées — registre V1.4',`<p>Solde simulé : <strong>${bankBalance(id)} journée(s)</strong>. Base de la fiche : ${esc(stu(id).JoursBanque||0)}; ajustements : ${entries.length}. Chaque écriture est conservée, sans suppression.</p><form onsubmit="return submitBankChange(event)"><div class="formgrid two">${field('Élève','bankStudent',select('bankStudent',stopts(id)))}${field('Date','bankDate',input('bankDate','date',filterDate||'2026-11-10','required'))}${field('Variation en journées (pas de 0,5)','bankDays',input('bankDays','number','0.5','required min="-30" max="30" step="0.5"'))}${field('Motif','bankReason',input('bankReason','text','','required minlength="5" maxlength="120"'))}</div><div class="actions"><button class="btn" type="submit">Enregistrer l’ajustement</button><button class="btn" type="button" onclick="exportBankLedger()">Exporter le journal CSV</button></div></form>${tbody(rows,['Date','Variation','Motif','Référence'])}<p class="footnote">Données fictives seulement. Les règles officielles de la banque doivent être validées avant tout usage.</p>`);}
+function exportBankLedger(){downloadCsv(['Cle','NoFiche','Jours','Motif','DateModification'],state.ajustementsBanque,'Banque_Journees_Demo.csv');toast('Journal de banque exporté — fictif');return true;}
+function focusQualityIssue(id,date,session){if(!stu(id)||!isIsoDate(date)||!['AM','PM'].includes(session)){toast('Référence d’anomalie invalide');return false}selected=id;filterDate=date;const p=state.presences.find(x=>x.NoFiche===id&&x.DateJour===date&&x.Session===session);if(p){view='presences';render();toast('Séance trouvée : utilisez Corriger pour modifier le pointage');}else{view='presences';render();toast('Séance non saisie : vérifier avant de créer une absence');}return true;}
+function issueActionPanel(){const d=filterDate||'2026-11-10';const issues=qualityIssues(d,reportLab).filter(i=>qualityStudent==='TOUS'||i.NoFiche===qualityStudent);const rows=issues.map(i=>`<tr><td>${esc(i.DateJour)}</td><td>${esc(i.NoFiche)}</td><td>${esc(i.Session)}</td><td>${esc(i.Type)}</td><td><button class="btn" onclick="focusQualityIssue('${esc(i.NoFiche)}','${esc(i.DateJour)}','${esc(i.Session)}')">Voir la séance</button></td></tr>`);
+ return panel('Corrections guidées — V1.4',`<div class="hint">Une anomalie « Non saisi » ne constitue jamais une absence. Aucune correction automatique n'est effectuée.</div>${field('Filtrer les anomalies par élève','issueStudent',select('issueStudent',opts([['TOUS','Tous les élèves'],...state.eleves.map(s=>[s.NoFiche,s.Title])],qualityStudent),'onchange="qualityStudent=this.value;render()"'))}${tbody(rows,['Date','Fiche','Séance','Anomalie','Action'])}`);}
+const v14Fiche=fiche;fiche=function(){return v14Fiche()+bankPanel()};
+const v14Rapports=rapports;rapports=function(){return v14Rapports()+issueActionPanel()};
+
+// V1.9 — prévalidation bloquante des exports Tosca et journal des corrections.
+// Le contrôle ne certifie PAS le format Tosca officiel.
+if(!Array.isArray(state.corrections))state.corrections=[];
+function validateToscaExport(date,lab='TOUS'){
+ const issues=[];
+ if(!isIsoDate(date)){issues.push({type:'date_invalide',message:'Date ISO invalide'});return {ok:false,issues};}
+ const students=state.eleves.filter(s=>s.Actif&&(lab==='TOUS'||s.Laboratoire===lab));
+ if(!students.length)issues.push({type:'aucun_eleve',message:'Aucun élève actif dans le groupe'});
+ for(const s of students){
+  if(!DEMO_IDS.has(s.NoFiche)){issues.push({type:'fiche_inconnue',message:s.NoFiche});continue;}
+  if(!labSchoolDay(date,s.Laboratoire).eligible)continue;
+  for(const session of ['AM','PM']){
+   const key=`${s.NoFiche}|${date}|${session}`;
+   const records=state.presences.filter(p=>p.ClePointage===key);
+   if(records.length!==1){issues.push({type:records.length?'doublon':'non_saisi',message:key});continue;}
+   const p=records[0];
+   if(p.NoFiche!==s.NoFiche||p.DateJour!==date||p.Session!==session||p.Laboratoire!==s.Laboratoire)issues.push({type:'cle_incoherente',message:key});
+   if(!['present','retard','absent','stage'].includes(p.Statut))issues.push({type:'statut_invalide',message:key});
+   if(p.Statut==='absent'&&(p.HeureArrivee||p.HeureDepart))issues.push({type:'absence_avec_heures',message:key});
+   if(['present','retard'].includes(p.Statut)&&(!p.HeureArrivee||!p.HeureDepart||minutes(p.HeureDepart)<minutes(p.HeureArrivee)))issues.push({type:'heures_incompletes',message:key});
+  }
+ }
+ return {ok:issues.length===0,issues};
+}
+const exportToscaAvantV19=exportTosca;
+exportTosca=function(){
+ const date=$('rDate')?.value||filterDate;
+ const validation=validateToscaExport(date,'TOUS');
+ if(!validation.ok){toast('Export Tosca bloqué : '+validation.issues.length+' anomalie(s) à corriger.');return false;}
+ exportToscaAvantV19();return true;
+};
+const savePresenceAvantV19=savePresence;
+savePresence=function(evt,key){
+ const previous=state.presences.find(p=>p.ClePointage===key);
+ const before=previous?JSON.stringify(previous):null;
+ const result=savePresenceAvantV19(evt,key);
+ const after=state.presences.find(p=>p.ClePointage===key);
+ if(result===false&&before&&after&&JSON.stringify(after)!==before){
+  state.corrections.push({Cle:'CORR-'+String(state.corrections.length+1).padStart(6,'0'),ClePointage:key,Avant:before,Apres:JSON.stringify(after),DateCorrection:new Date().toISOString(),Origine:'demo_locale'});
+  save();
+ }
+ return result;
+};
+function exportCorrectionAudit(){
+ downloadCsv(['Cle','ClePointage','Avant','Apres','DateCorrection','Origine'],state.corrections,'Corrections_Demo.csv');
+ toast('Journal des corrections fictives exporté');
+}
+const rapportsAvantV19=rapports;
+rapports=function(){
+ const date=filterDate||'2026-11-10';const v=validateToscaExport(date,'TOUS');
+ return rapportsAvantV19()+panel('Contrôle d’export Tosca — V1.9',
+ `<p><strong>${v.ok?'Prévalidation réussie':'Export bloqué'}</strong> · ${v.issues.length} anomalie(s) pour ${esc(date)}.</p>`+
+ (v.issues.length?`<ul>${v.issues.slice(0,15).map(x=>`<li>${esc(x.type)} : ${esc(x.message)}</li>`).join('')}</ul>`:'<p>Les séances prévues sont complètes pour les deux élèves fictifs.</p>')+
+ `<div class="actions"><button class="btn" onclick="exportCorrectionAudit()">Exporter le journal des corrections</button></div>`,
+ 'Validation locale uniquement. Le gabarit officiel Tosca doit être confirmé avant toute utilisation réelle.');
+};
+
+// V2.0 — annulation contrôlée : nouvelle écriture d'audit, jamais suppression du journal.
+function correctionReversible(entry){
+ if(!entry||!entry.ClePointage||!entry.Avant||!entry.Apres)return false;
+ const current=state.presences.find(p=>p.ClePointage===entry.ClePointage);
+ if(!current||JSON.stringify(current)!==entry.Apres)return false;
+ try{
+  const previous=JSON.parse(entry.Avant);
+  return previous.ClePointage===entry.ClePointage&&DEMO_IDS.has(previous.NoFiche)&&isSafePointage(previous);
+ }catch(_){return false;}
+}
+function revertCorrection(cle){
+ const entry=state.corrections.find(c=>c.Cle===cle);
+ if(!correctionReversible(entry)){toast('Annulation refusée : pointage modifié depuis cette correction.');return false;}
+ const current=state.presences.find(p=>p.ClePointage===entry.ClePointage);
+ const before=JSON.stringify(current);
+ const previous=JSON.parse(entry.Avant);
+ Object.assign(current,previous);
+ state.corrections.push({Cle:'CORR-'+String(state.corrections.length+1).padStart(6,'0'),ClePointage:entry.ClePointage,Avant:before,Apres:JSON.stringify(current),DateCorrection:new Date().toISOString(),Origine:'annulation_demo',ReferenceAnnulee:cle});
+ save();toast('Correction annulée et nouvelle trace ajoutée au journal.');return true;
+}
+function correctionAuditPanel(){
+ const rows=[...state.corrections].reverse().slice(0,30).map(c=>`<tr><td>${esc(c.Cle)}</td><td>${esc(c.ClePointage)}</td><td>${esc(c.DateCorrection||'')}</td><td>${esc(c.Origine||'')}</td><td>${correctionReversible(c)?`<button class="btn mini" onclick="revertCorrection('${esc(c.Cle)}')">Annuler</button>`:'—'}</td></tr>`);
+ return panel('Historique des corrections — V2.0',`<p class="muted">Annulation possible uniquement si le pointage correspond encore exactement à la correction. Chaque annulation ajoute une nouvelle trace.</p>${tbody(rows,['Référence','Pointage','Date','Action','Annulation'])}<div class="actions"><button class="btn" onclick="exportCorrectionAudit()">Exporter toutes les traces CSV</button></div>`);
+}
+const journalAvantV20=journal;
+journal=function(){return journalAvantV20()+correctionAuditPanel()};
+const exportCorrectionAuditAvantV20=exportCorrectionAudit;
+exportCorrectionAudit=function(){
+ downloadCsv(['Cle','ClePointage','Avant','Apres','DateCorrection','Origine','ReferenceAnnulee'],state.corrections,'Corrections_Demo_V2_0.csv');
+ toast('Historique complet des corrections exporté (fictif)');
+};
+
+// V2.1 — rapprochement indépendant des heures et des séances de la semaine.
+// Le calcul est dérivé des pointages courants; il ne modifie jamais les heures officielles.
+function weeklyReconciliation(date,lab='TOUS'){
+ if(!isIsoDate(date)||!['TOUS','LAB1','LAB2'].includes(lab))return {ok:false,issues:[{type:'filtre_invalide',key:String(date)}],rows:[],totalHours:0};
+ const days=new Set(weekDates(date));const issues=[],rows=[];
+ const students=state.eleves.filter(s=>s.Actif&&(lab==='TOUS'||s.Laboratoire===lab));
+ for(const s of students){
+  let hoursTotal=0,complete=0,absent=0,missing=0;
+  for(const day of days){
+   const eligible=labSchoolDay(day,s.Laboratoire).eligible;
+   for(const session of ['AM','PM']){
+    const key=`${s.NoFiche}|${day}|${session}`;
+    const matches=state.presences.filter(p=>p.NoFiche===s.NoFiche&&p.DateJour===day&&p.Session===session);
+    if(!eligible){if(matches.length)issues.push({type:'hors_calendrier',key});continue;}
+    if(matches.length!==1){issues.push({type:matches.length?'doublon':'non_saisi',key});missing++;continue;}
+    const p=matches[0];
+    if(p.ClePointage!==key||p.Laboratoire!==s.Laboratoire)issues.push({type:'identite_incoherente',key});
+    if(!comp(p.CodeCompetence))issues.push({type:'competence_inconnue',key});
+    if(p.Statut==='absent'){
+     if(p.HeureArrivee||p.HeureDepart)issues.push({type:'absence_avec_heures',key});
+     absent++;continue;
+    }
+    if(!['present','retard','stage'].includes(p.Statut)){issues.push({type:'statut_invalide',key});continue;}
+    const start=minutes(p.HeureArrivee),end=minutes(p.HeureDepart);
+    if(!Number.isFinite(start)||!Number.isFinite(end)||end<=start||end-start>12*60){issues.push({type:'heures_invalides',key});continue;}
+    const h=(end-start)/60;
+    if(!Number.isFinite(h)||h<=0){issues.push({type:'duree_invalide',key});continue;}
+    hoursTotal+=h;complete++;
+   }
+  }
+  rows.push({NoFiche:s.NoFiche,NomComplet:s.Title,Laboratoire:s.Laboratoire,HeuresCalculees:Number(hoursTotal.toFixed(2)),SeancesCompletes:complete,AbsencesDeclarees:absent,NonSaisies:missing});
+ }
+ return {ok:issues.length===0,issues,rows,totalHours:Number(rows.reduce((n,r)=>n+r.HeuresCalculees,0).toFixed(2))};
+}
+function exportWeeklyReconciliation(){
+ const d=$('rDate')?.value||filterDate;
+ const a=weeklyReconciliation(d,reportLab);
+ if(!a.rows.length){toast('Aucune ligne à exporter : vérifier la période.');return false;}
+ downloadCsv(['NoFiche','NomComplet','Laboratoire','HeuresCalculees','SeancesCompletes','AbsencesDeclarees','NonSaisies'],a.rows,'Rapprochement_hebdomadaire_'+d+'_'+reportLab+'.csv');
+ toast(a.ok?'Rapprochement exporté — démonstration':'Rapprochement provisoire : anomalies signalées');return true;
+}
+function reconciliationPanel(){
+ const d=filterDate||'2026-11-10',a=weeklyReconciliation(d,reportLab);
+ const rows=a.rows.map(r=>`<tr><td>${esc(r.NomComplet)} (${esc(r.NoFiche)})</td><td>${esc(r.Laboratoire)}</td><td>${r.HeuresCalculees.toFixed(2)} h</td><td>${r.SeancesCompletes}</td><td>${r.AbsencesDeclarees}</td><td>${r.NonSaisies}</td></tr>`);
+ return panel('Rapprochement hebdomadaire — V2.1',`<p><strong>${a.ok?'Aucune anomalie détectée':'À vérifier : '+a.issues.length+' anomalie(s)'}</strong> · ${a.totalHours.toFixed(2)} h calculées sur les séances valides.</p>${tbody(rows,['Élève','Groupe','Heures','Séances complètes','Absences déclarées','Non saisies'])}<div class="actions"><button class="btn" onclick="exportWeeklyReconciliation()">Exporter le rapprochement CSV</button></div>${a.issues.length?`<p class="muted">Premières anomalies : ${a.issues.slice(0,8).map(x=>esc(x.type+' ('+x.key+')')).join(' ; ')}</p>`:''}<p class="footnote">Heures calculées à partir des arrivées et départs valides, sans arrondi officiel ni déduction de banque. Une séance non saisie n'est pas une absence. Le CSV est un contrôle interne fictif, pas un export Tosca validé.</p>`);
+}
+const rapportsAvantV21=rapports;
+rapports=function(){return rapportsAvantV21()+reconciliationPanel()};
+
+// V2.2 — ventilation indépendante par compétence, sans mutation des données.
+// Les pointages ambigus sont exclus des heures; les anomalies restent visibles.
+function competencyReconciliation(date,lab='TOUS'){
+ const weekly=weeklyReconciliation(date,lab);
+ if(!weekly.rows.length)return {ok:false,issues:weekly.issues,rows:[],totalHours:0};
+ const issues=[...weekly.issues],days=new Set(weekDates(date)),rows=[],byCode=new Map();
+ const students=state.eleves.filter(s=>s.Actif&&(lab==='TOUS'||s.Laboratoire===lab));
+ for(const student of students){
+  for(const day of days){
+   if(!labSchoolDay(day,student.Laboratoire).eligible)continue;
+   for(const session of ['AM','PM']){
+    const key=`${student.NoFiche}|${day}|${session}`;
+    const matches=state.presences.filter(p=>p.NoFiche===student.NoFiche&&p.DateJour===day&&p.Session===session);
+    if(matches.length!==1)continue;
+    const p=matches[0];
+    if(p.ClePointage!==key||p.Laboratoire!==student.Laboratoire||!['present','retard','stage'].includes(p.Statut))continue;
+    if(!comp(p.CodeCompetence))continue;
+    const start=minutes(p.HeureArrivee),end=minutes(p.HeureDepart);
+    if(!Number.isFinite(start)||!Number.isFinite(end)||end<=start||end-start>720)continue;
+    const k=student.NoFiche+'|'+p.CodeCompetence;
+    const item=byCode.get(k)||{NoFiche:student.NoFiche,NomComplet:student.Title,Laboratoire:student.Laboratoire,CodeCompetence:p.CodeCompetence,HeuresCible:Number(comp(p.CodeCompetence).Heures),MinutesCalculees:0,Seances:0};
+    item.MinutesCalculees+=end-start;item.Seances++;byCode.set(k,item);
+   }
+  }
+ }
+ for(const r of byCode.values()){
+  rows.push({...r,HeuresCalculees:Number((r.MinutesCalculees/60).toFixed(2)),HeuresRestantesIndicatives:Number(Math.max(0,r.HeuresCible-r.MinutesCalculees/60).toFixed(2))});
+ }
+ rows.sort((a,b)=>a.NoFiche.localeCompare(b.NoFiche)||a.CodeCompetence.localeCompare(b.CodeCompetence));
+ const totalMinutes=rows.reduce((n,r)=>n+r.MinutesCalculees,0);
+ const weeklyMinutes=weekly.rows.reduce((n,r)=>n+Math.round(r.HeuresCalculees*60),0);
+ // Comparaison à la minute près, avec tolérance pour l'arrondi d'affichage hebdomadaire.
+ if(Math.abs(totalMinutes-weeklyMinutes)>weekly.rows.length)issues.push({type:'ecart_ventilation',key:String(date)});
+ return {ok:issues.length===0,issues,rows,totalHours:Number((totalMinutes/60).toFixed(2))};
+}
+function exportCompetencyReconciliation(){
+ const d=$('rDate')?.value||filterDate,a=competencyReconciliation(d,reportLab);
+ if(!a.rows.length){toast('Aucune heure admissible à ventiler');return false;}
+ const cols=['NoFiche','NomComplet','Laboratoire','CodeCompetence','HeuresCible','HeuresCalculees','HeuresRestantesIndicatives','Seances'];
+ downloadCsv(cols,a.rows,'Ventilation_competences_'+d+'_'+reportLab+'.csv');
+ toast(a.ok?'Ventilation exportée (démonstration)':'Ventilation provisoire : anomalies à corriger');return true;
+}
+function competencyReconciliationPanel(){
+ const a=competencyReconciliation(filterDate||'2026-11-10',reportLab);
+ const rows=a.rows.map(r=>`<tr><td>${esc(r.NomComplet)} (${esc(r.NoFiche)})</td><td>${esc(r.CodeCompetence)}</td><td>${r.HeuresCalculees.toFixed(2)} h</td><td>${r.HeuresCible} h</td><td>${r.Seances}</td></tr>`);
+ return panel('Heures par compétence — V2.2',`<p><strong>${a.ok?'Ventilation cohérente':'Ventilation provisoire : '+a.issues.length+' anomalie(s)'}</strong> · ${a.totalHours.toFixed(2)} h admissibles, ${a.rows.length} ligne(s).</p>${tbody(rows,['Élève','Compétence','Heures pointées','Cible DEP','Séances'])}<div class="actions"><button class="btn" onclick="exportCompetencyReconciliation()">Exporter les heures par compétence (CSV)</button></div><p class="footnote">Calcul indépendant à partir des séances valides uniquement. Les doublons, absences, heures invalides et compétences inconnues ne sont pas comptés. Les heures historiques, les reprises et les règles officielles d'arrondi ne sont pas intégrées. Ne pas utiliser comme relevé officiel.</p>`);
+}
+const rapportsAvantV22=rapports;
+rapports=function(){return rapportsAvantV22()+competencyReconciliationPanel()};
+
+// V2.3 — cumul historique explicite, sans compter deux fois les séances.
+// Une période historique est close à sa DateFin; les présences postérieures seulement
+// peuvent être ajoutées au cumul. Aucune importation réelle dans cette démonstration.
+function historicalCompetencyTotals(date,lab='TOUS'){
+ const current=competencyReconciliation(date,lab);
+ const issues=[...current.issues],byKey=new Map(),seen=new Set(),ranges=new Map();
+ const historical=Array.isArray(state.historiqueHeures)?state.historiqueHeures:[];
+ const allowed=new Set(state.eleves.filter(e=>e.Actif&&(lab==='TOUS'||e.Laboratoire===lab)).map(e=>e.NoFiche));
+ const days=weekDates(date),end=days[days.length-1];
+ for(const h of historical){
+  const key=String(h.NoFiche)+'|'+String(h.CodeCompetence),ref=String(h.Cle||'');
+  const minutes=Number(h.MinutesValidees),begin=h.DateDebut||'',finish=h.DateFin||'';
+  if(!allowed.has(h.NoFiche)||!comp(h.CodeCompetence)||!ref||!Number.isInteger(minutes)||minutes<0||!/^\d{4}-\d{2}-\d{2}$/.test(finish)||finish>end||(begin&&(!/^\d{4}-\d{2}-\d{2}$/.test(begin)||begin>finish))){
+   issues.push({type:'historique_invalide',key:ref||key});continue;
+  }
+  if(seen.has(ref)){issues.push({type:'historique_doublon',key:ref});continue;}
+  seen.add(ref);
+  const prior=ranges.get(key)||[];
+  // Sans date de début, plusieurs blocs pour la même compétence sont impossibles à valider.
+  if(prior.length&&(!begin||prior.some(x=>!x.begin||begin<=x.finish&&x.begin<=finish))){
+   issues.push({type:'periodes_historiques_chevauchantes',key});continue;
+  }
+  prior.push({begin,finish});ranges.set(key,prior);
+  const old=byKey.get(key)||{NoFiche:h.NoFiche,CodeCompetence:h.CodeCompetence,MinutesHistoriques:0,MinutesRecentes:0};
+  old.MinutesHistoriques+=minutes;byKey.set(key,old);
+ }
+ for(const r of current.rows){
+  const key=r.NoFiche+'|'+r.CodeCompetence,periods=ranges.get(key)||[];
+  const overlap=days.some(day=>periods.some(x=>(!x.begin||day>=x.begin)&&day<=x.finish)&&state.presences.some(p=>p.NoFiche===r.NoFiche&&p.CodeCompetence===r.CodeCompetence&&p.DateJour===day));
+  if(overlap){issues.push({type:'chevauchement_historique',key});continue;}
+  const old=byKey.get(key)||{NoFiche:r.NoFiche,CodeCompetence:r.CodeCompetence,MinutesHistoriques:0,MinutesRecentes:0};
+  old.MinutesRecentes+=r.MinutesCalculees;byKey.set(key,old);
+ }
+ const rows=[...byKey.values()].map(r=>({...r,HeuresTotales:Number(((r.MinutesHistoriques+r.MinutesRecentes)/60).toFixed(2))})).sort((a,b)=>a.NoFiche.localeCompare(b.NoFiche)||a.CodeCompetence.localeCompare(b.CodeCompetence));
+ return {ok:issues.length===0,issues,rows,totalHours:Number((rows.reduce((n,r)=>n+r.MinutesHistoriques+r.MinutesRecentes,0)/60).toFixed(2))};
+}
+function historicalPanel(){
+ const a=historicalCompetencyTotals(filterDate||'2026-11-10',reportLab);
+ const rows=a.rows.map(r=>`<tr><td>${esc(r.NoFiche)}</td><td>${esc(r.CodeCompetence)}</td><td>${(r.MinutesHistoriques/60).toFixed(2)}</td><td>${(r.MinutesRecentes/60).toFixed(2)}</td><td>${r.HeuresTotales.toFixed(2)}</td></tr>`);
+ return panel('Cumul historique contrôlé — V2.4',`<p><strong>${a.ok?'Cumul cohérent':'Cumul bloqué : '+a.issues.length+' anomalie(s)'}</strong> · ${a.totalHours.toFixed(2)} h (historique validé + semaine).</p>${tbody(rows,['Fiche','Compétence','Historique (h)','Semaine (h)','Total (h)'])}<div class="actions"><button class="btn" ${a.ok?'':'disabled'} onclick="exportHistoricalTotals()">Exporter le cumul contrôlé (CSV)</button></div><p class="footnote">Plusieurs périodes historiques sont acceptées seulement avec dates de début et de fin distinctes, sans chevauchement. Le cumul n'est pas un total DEP définitif. En cas de chevauchement, aucun export n'est autorisé.</p>`);
+}
+function exportHistoricalTotals(){
+ const a=historicalCompetencyTotals(filterDate||'2026-11-10',reportLab);
+ if(!a.ok){toast('Export bloqué : anomalies du cumul');return false;}
+ downloadCsv(['NoFiche','CodeCompetence','MinutesHistoriques','MinutesRecentes','HeuresTotales'],a.rows,'Cumul_historique_controle.csv');
+ toast('Cumul de démonstration exporté');return true;
+}
+const rapportsAvantV23=rapports;
+rapports=function(){return rapportsAvantV23()+historicalPanel()};
+
+
+// V2.5 — suivi du cheminement, minutes entières et cibles DEP par compétence.
+// Un dépassement est un avertissement (jamais une suppression d'heures réelles).
+function competencyProgress(date,lab='TOUS'){
+ const a=historicalCompetencyTotals(date,lab);
+ const students=state.eleves.filter(e=>e.Actif&&(lab==='TOUS'||e.Laboratoire===lab));
+ const totals=new Map(a.rows.map(r=>[r.NoFiche+'|'+r.CodeCompetence,r.MinutesHistoriques+r.MinutesRecentes]));
+ const rows=[];const issues=[...a.issues];
+ for(const student of students){
+  for(const c of state.competences){
+   const code=c.Code||c.CodeCompetence;
+   const target=Number(c.Heures)*60;
+   if(!code||!Number.isFinite(target)||target<=0||!Number.isInteger(target)){
+    issues.push({type:'cible_competence_invalide',key:String(code)});continue;
+   }
+   const minutes=totals.get(student.NoFiche+'|'+code)||0;
+   rows.push({NoFiche:student.NoFiche,CodeCompetence:code,Intitule:c.Title||'',MinutesCible:target,MinutesCumulees:minutes,MinutesRestantes:Math.max(0,target-minutes),DepassementMinutes:Math.max(0,minutes-target),Pourcentage:Number((100*minutes/target).toFixed(1))});
+  }
+ }
+ return {ok:issues.length===0,issues,rows,overruns:rows.filter(r=>r.DepassementMinutes>0),totalMinutes:rows.reduce((n,r)=>n+r.MinutesCumulees,0)};
+}
+function progressPanel(){
+ const a=competencyProgress(filterDate||'2026-11-10',reportLab);
+ const current=a.rows.filter(r=>r.NoFiche===selected);
+ const body=current.map(r=>`<tr><td>${esc(r.CodeCompetence)}</td><td>${esc(r.Intitule)}</td><td>${(r.MinutesCumulees/60).toFixed(2)}</td><td>${(r.MinutesCible/60).toFixed(0)}</td><td>${(r.MinutesRestantes/60).toFixed(2)}</td><td>${r.Pourcentage.toFixed(1)} %${r.DepassementMinutes?' ⚠':''}</td></tr>`);
+ return panel('Cheminement par compétence — V2.5',`<p><strong>${a.ok?'Calcul contrôlé':'Calcul bloqué : '+a.issues.length+' anomalie(s)'}</strong> · ${a.overruns.length} dépassement(s) à examiner. Fiche affichée : ${esc(selected)}.</p>${tbody(body,['Code','Compétence','Acquises (h)','Cible (h)','Restantes (h)','Progression'])}<div class="actions"><button class="btn" ${a.ok?'':'disabled'} onclick="exportProgress()">Exporter le cheminement (CSV)</button></div><p class="footnote">Les heures représentent le cumul historique validé et les présences de la semaine affichée, non un relevé officiel. Les dépassements restent visibles et ne sont pas effacés. Les évaluations et les validations pédagogiques ne sont pas déduites de ce calcul.</p>`);
+}
+function exportProgress(){
+ const a=competencyProgress(filterDate||'2026-11-10',reportLab);
+ if(!a.ok){toast('Export bloqué : incohérences du cheminement');return false;}
+ downloadCsv(['NoFiche','CodeCompetence','Intitule','MinutesCible','MinutesCumulees','MinutesRestantes','DepassementMinutes','Pourcentage'],a.rows,'Cheminement_competences_controle.csv');
+ toast('Cheminement fictif exporté');return true;
+}
+const rapportsAvantV25=rapports;
+rapports=function(){return rapportsAvantV25()+progressPanel()};
+
+// V2.6 — cheminement sur toutes les semaines réellement pointées jusqu'à la date choisie.
+// La date de référence est inclusive; aucune semaine vide n'est transformée en absence.
+function multiweekCompetencyProgress(date,lab='TOUS'){
+ const cutoff=isIsoDate(date)?date:'2026-11-10';
+ const weeks=[...new Set(state.presences.filter(p=>isIsoDate(p.DateJour)&&p.DateJour<=cutoff).map(p=>weekDates(p.DateJour)[0]))].sort();
+ const baseline=historicalCompetencyTotals(cutoff,lab);
+ const issues=[...baseline.issues.filter(i=>i.type!=='chevauchement_historique')];
+ const historical=new Map();
+ for(const r of baseline.rows)historical.set(r.NoFiche+'|'+r.CodeCompetence,r.MinutesHistoriques);
+ const recent=new Map();let sessions=0;
+ for(const week of weeks){
+  const weekly=competencyReconciliation(week,lab);
+  // Ne pas considérer les jours après la date de référence.
+  for(const issue of weekly.issues)issues.push({...issue,semaine:week});
+  for(const r of weekly.rows){
+   const dates=state.presences.filter(p=>p.NoFiche===r.NoFiche&&p.CodeCompetence===r.CodeCompetence&&p.DateJour>=week&&p.DateJour<=weekDates(week)[6]);
+   if(dates.some(p=>p.DateJour>cutoff)){
+    // Recalcul à partir des séances admissibles, limité au jour de référence.
+    const eligible=dates.filter(p=>p.DateJour<=cutoff&&['present','retard','stage'].includes(p.Statut)&&p.HeureArrivee&&p.HeureDepart&&minutes(p.HeureDepart)>minutes(p.HeureArrivee));
+    const value=eligible.reduce((n,p)=>n+minutes(p.HeureDepart)-minutes(p.HeureArrivee),0);
+    const k=r.NoFiche+'|'+r.CodeCompetence;recent.set(k,(recent.get(k)||0)+value);sessions+=eligible.length;
+   }else{const k=r.NoFiche+'|'+r.CodeCompetence;recent.set(k,(recent.get(k)||0)+r.MinutesCalculees);sessions+=r.Seances;}
+  }
+ }
+ const allowed=new Set(state.eleves.filter(e=>e.Actif&&(lab==='TOUS'||e.Laboratoire===lab)).map(e=>e.NoFiche));
+ for(const h of state.historiqueHeures||[]){
+  if(!allowed.has(h.NoFiche))continue;
+  const overlapping=state.presences.some(p=>p.NoFiche===h.NoFiche&&p.CodeCompetence===h.CodeCompetence&&p.DateJour<=cutoff&&p.DateJour>=h.DateDebut&&p.DateJour<=h.DateFin);
+  if(overlapping)issues.push({type:'chevauchement_historique_multiweek',key:String(h.Cle||h.NoFiche+'|'+h.CodeCompetence)});
+ }
+ const rows=[];
+ for(const e of state.eleves.filter(e=>allowed.has(e.NoFiche))){
+  for(const c of state.competences){
+   const code=c.Code||c.CodeCompetence,target=Number(c.Heures)*60,k=e.NoFiche+'|'+code;
+   if(!Number.isInteger(target)||target<=0){issues.push({type:'cible_invalide',key:code});continue;}
+   const history=historical.get(k)||0,pointed=recent.get(k)||0,total=history+pointed;
+   rows.push({NoFiche:e.NoFiche,CodeCompetence:code,Intitule:c.Title||'',MinutesCible:target,MinutesHistoriques:history,MinutesRecentes:pointed,MinutesCumulees:total,MinutesRestantes:Math.max(0,target-total),DepassementMinutes:Math.max(0,total-target),Pourcentage:Number((100*total/target).toFixed(1))});
+  }
+ }
+ return {ok:issues.length===0,issues,rows,weeks:weeks.length,sessions,cutoff,totalMinutes:rows.reduce((n,r)=>n+r.MinutesCumulees,0)};
+}
+function multiweekPanel(){
+ const a=multiweekCompetencyProgress(filterDate||'2026-11-10',reportLab),rows=a.rows.filter(r=>r.NoFiche===selected);
+ const body=rows.map(r=>`<tr><td>${esc(r.CodeCompetence)}</td><td>${(r.MinutesHistoriques/60).toFixed(2)}</td><td>${(r.MinutesRecentes/60).toFixed(2)}</td><td>${(r.MinutesCumulees/60).toFixed(2)}</td><td>${(r.MinutesRestantes/60).toFixed(2)}</td></tr>`);
+ return panel('Cheminement cumulatif — V2.6',`<p><strong>${a.ok?'Cumul vérifié localement':'Export bloqué : '+a.issues.length+' anomalie(s)'}</strong> · ${a.weeks} semaine(s) avec pointage · référence ${esc(a.cutoff)} · fiche ${esc(selected)}.</p>${tbody(body,['Compétence','Historique (h)','Pointages (h)','Cumul (h)','Reste (h)'])}<div class="actions"><button class="btn" ${a.ok?'':'disabled'} onclick="exportMultiweek()">Exporter le cumul multi-semaines (CSV)</button></div><p class="footnote">Démonstration : les semaines non saisies ne sont pas des absences. Le contrôle des présences incomplètes peut bloquer l’export. Ce calcul ne constitue pas un relevé officiel.</p>`);
+}
+function exportMultiweek(){
+ const a=multiweekCompetencyProgress(filterDate||'2026-11-10',reportLab);
+ if(!a.ok){toast('Export bloqué : vérifier les incohérences');return false;}
+ downloadCsv(['NoFiche','CodeCompetence','MinutesCible','MinutesHistoriques','MinutesRecentes','MinutesCumulees','MinutesRestantes','DepassementMinutes','Pourcentage'],a.rows,'Cheminement_multisemaines_'+a.cutoff+'.csv');return true;
+}
+const rapportsAvantV26=rapports;
+rapports=function(){return rapportsAvantV26()+multiweekPanel()};
+</script></body></html>
